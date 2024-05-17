@@ -1,0 +1,79 @@
+//To setup user name and email 
+git config --global user.name "<Any name>"
+git config --global user.email "<Any email id>"
+
+//To display user details
+git config --global user.name
+git config --global user.email
+
+//To see all configurations
+git config --list
+
+//To create local repo in current location[.]
+git init .
+
+//To see all hiden files 
+ls -a
+
+//To see status
+git status
+untracked files->red:new or modified files in working directory
+tracked files->green:added to staging area not to local repo
+
+//Workflow
+working directory ---git add-->staging area[index area]--git commit-->repository
+
+//To add files from working directory to staging area
+git add finalename.extension
+git add .
+git add --all
+
+//To commit files from staging to local repo 
+git commit -m "commit message"
+
+//To see all commit
+git log
+git log --oneline
+
+//Compare code changes between working directory to staging area
+git diff
+
+//Compare code changes between working directory and local repository
+git diff HEAD
+
+//Compare code changes between staging arae and local repo
+git diff --staged
+git diff --staged HEAD
+
+
+//Compare code changes between commits 
+git diff <first 6 digit of commit id> <first 6 digit of commit id>
+
+GITHUB
+======
+Nandeesh-Appu
+Apjkalam!123
+https://github.com/login
+https://github.com/Nandeesh-Appu/Testing-Notes-2024.git
+
+FLOWS
+-----
+working dir --git add -->staging--git commit-->local repo--git push-->remote repo
+remote repo--git clone/pull-->working dir
+remote repo--git fetch-->local repo
+
+
+//To Clone existing repo from Github to working directory
+git clone <url>
+
+//To push code from local repo to remote repo
+git push origin master
+
+
+//To get remote repo details
+git config --get remote.origin.url
+
+//Git clone VS Git pull
+
+//To link local and remote repo
+

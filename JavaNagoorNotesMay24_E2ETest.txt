@@ -1,0 +1,2104 @@
+JAVA CONTENTS
+=============
+1.JAVA TYPES
+2.JAVA HISTORY
+3.DIFFERENCE BETWEEN JAVA AND OTHERS
+4.JAVA FEATURES
+5.JAVA NAMING CONVENTIONS
+6.JAVA PROGRAMMING FORMAT
+7.FIRST JAVA APPLICATION
+8.LANGUAGE FUNDAMENTALS
+9.TYPE CASTING
+10.CONDITIONAL STATEMENTS
+11.ITERATIVE STATEMENTS
+12.TRANSFER STATEMENT
+13.ARRAYS
+14.OBJECT ORIENTED FEATURES OVERVIEW
+15.CONTAINERS
+Class/Abstract Class/Interface
+16.METHODS
+17.OBJECT 
+18.CONSTRUCTORS
+19.INSTANCE CONTEXT
+20.THIS KEYWORD
+21.STATIC KEYWORD
+22.STATIC CONTEXT
+23.CLASS.FORNAME()
+24.NEWINSTANCE()
+25.SINGLETON CLASS
+26.FINAL KEYWORD
+27.ENUM
+28.MAIN METHOD
+29.INHERITANCE
+30.SUPER KEYWORD
+31.CLASS LEVEL TYPE CASTING
+
+
+************************************************************************************************************************************************************
+Day 1,2,3
+
+JAVA TYPES
+==========
+J2SE/Java SE
+->To create Standalone application
+
+J2EE/Java EE
+->Server side programming
+->Distributed applications/Enterprise applications
+->Client Server architecture applications
+
+J2ME/Java ME
+->Mobile applications
+
+************************************************************************************************************************************************************
+JAVA HISTORY
+============
+->James Gosling and Patrick Naughtan
+->3 major features
+Simple PL [Less exe time, memory.power consumptions]
+Tight coded PL [Less code]
+Architecture neutral PL [Hardware neutral]
+->1996 Jan 27 Java 1.0/JDK 1.0
+
+************************************************************************************************************************************************************
+Day 4,5,6,7,8,9
+
+DIFFERENCE BETWEEN JAVA AND OTHERS
+==================================
+
+1. Java is Dynamic PL
+---------------------
+->Allow memory allocation for the Primitive data types vaiables at Runtime
+->Objects created at Runtime
+
+Java Execution
+--------------
+.Java->[Compilation][Compiler][Compilation Time/Static Time]->Low level language/Machine level language/Byte Code/.Class file->[Translate to Native code and Execute][JVM][Runtime/Dynamic Time]->Output
+
+->Compilation
+Error check
+Translate HLL to LLL
+
+2. No Preprocessors in Java
+---------------------------
+->All Pre def library are given inform of Classes and Interfaces inside Packages.
+->Can be used any Pre defined library directly in Java program using import statments
+
+Ex:
+import java.io.*
+import java.sql.*
+
+->Compiler check these packages are avl in Java software or not during compilation time, If not avl then it throws package xxx does not exist.
+->Compiler will not load any packages in to the memory.
+->During execution JVM will load only required library into the memory during Runtime
+
+3.Java is Platform Independant PL
+---------------------------------
+->Compile in one OS and Execute in another OS[WORA]
+->Byte code, is not directly exe code, it will be converted and exe in any OS system.
+->Internally JVM will have a Translator to do this conversion before execution.
+->Java program is Platform independant but JVM is Platform dependant.
+
+4.Multiple Inheritence is not possible in Java
+----------------------------------------------
+->Any PL represents data in form of Objects as per Object oriented features then it is Object Oriented PL
+->Inheritance is relation between classes, it provides variables and methods of one class to other classes.
+->Used for Code reusability
+
+Super Class<--extends--Sub Class
+
+5.Garbage collector in Java
+---------------------------
+->Create Object, Store data, Process data, Destroy Object
+->Constructor are used to create Object
+->GC to destroy Object, when there is no reference to the Object.
+
+6.Fixed memory allocation for Primitive data types irrespective of the OS
+-------------------------------------------------------------------------
+byte 1 bytes
+short 2 bytes
+int 4 bytes 
+long 8 bytes
+float 4 bytes
+double 8 bytes
+char 2 bytes
+boolean 1 bit
+
+->In Java all character are represented inform of UNICODE [Represent all the natural lang characters]
+
+************************************************************************************************************************************************************
+Day 10,11,12
+
+JAVA FEATURES
+=============
+Simple,OOPL,Platform Ind,Arch netutral,Portable,Robust,Dynamic,Distribted,Secured,Multiprogramming,HighPerf,Interpretive
+
+************************************************************************************************************************************************************
+Day 13
+
+JAVA NAMING CONVENTIONS
+=======================
+->Case sensitive PL
+
+Recommended Rules
+-----------------
+Class/Abstract Class/Interface - Start with Upper case and subsequent symbls should be upper case
+Method/Variable- Start with Lower case and subsequent symbls should be upper case
+Package-Lower case
+Constants-Upper case
+
+************************************************************************************************************************************************************
+Day 13,14,15
+
+JAVA PROGRAMMING FORMAT
+=======================
+
+Comment[Optional]
+Package[Optional]
+Import[Optional]
+Calss/Interface[Optional]
+Main Class[Mandatory]
+
+Comments
+--------
+Single line 
+//
+
+Multi line
+/*
+*/
+
+Package
+--------
+->Java is collection of API->API is collection of Packages->Package is collection of Classes and Interfaces->Classes and Interfaces is collection of Variables and Methods
+->Package is collection of related classes and interfaces as single unit
+->Folder contains .class files represent related classes and interfaces
+
+Ex:java.lang/java.io/java.util
+
+->Types
+Pre defined
+User defined
+
+Ex:
+package p1
+package p1.p2.p3
+
+->Conditions
+Package name should be first line
+Package name should be unique
+
+->Syntax
+company name in rev . project name . module name . submodule name
+
+Import 
+-------
+->Make avl specific or all classes or interfaces of a package to present java program.
+
+NOTE:For each and every class,Interface, AC, Enums, Inner class seperate .class file will be created on compilation.
+All these .class files will be saved inside the package folder
+
+import packagename.* 
+import java.io.*
+
+import packagename.memberName
+import java.util.ArrayList
+
+->Using Classes and Interfaces of any specific package without importing in any specific java file
+Fully Quaified name ->packageName.memberName
+Example:java.util.List list=new java.util.ArrayList();
+
+Main Class
+----------
+->Class having main method
+->Contains App Logic, executed by JVM automatically
+->Start and End point of the Program execution
+************************************************************************************************************************************************************
+
+Day 17-22
+
+FIRST JAVA APPLICATION
+======================
+
+Setup
+-----
+->Download and Install JDK
+->Set env variable
+Copy path include bin and paste in path env variable value
+
+package basics1;
+
+public class HelloWorld {
+
+	public static void main(String[] args) {
+
+		System.out.println("Hello Appu !");
+
+	}
+
+}
+
+Save File
+---------
+->Public class name, if not avl then use class name having main method.
+->No 2 class can be public in same java file.
+
+Compile
+-------
+->Check error and convert HLL to .class files
+->For each and every class,Interface, AC, Enums, Inner class seperate .class file will be created on compilation.
+->All these .class files will be saved inside the package folder
+
+Execute
+-------
+->JVM will create main thread and starts executing main method logic
+->After execution all the resouce will be released and thread will move to dead state
+
+************************************************************************************************************************************************************
+Day 24-31
+
+LANGUAGE FUNDAMENTALS
+====================
+Tokens/Data types/Type casting/Java statements/Arrays
+
+Tokens
+------
+Identifiers/Literals/Keywords/Operators
+
+Identifiers Rules:
+Start with Character or _ or $
+No spaces, can use _
+Operators, Keywords, Primitive data types not allowed
+No special symbols except $ and _
+
+Literals
+--------
+Integrals/Floating point/Boolean/String Literals
+
+Number Systems
+--------------
+Binary
+0 or 1
+Prefix: 0b or 0B
+Ex:int b=0b1010
+
+Octal
+0-7
+Prefix: 0[Zero]
+Ex:int b=02345
+
+Decimal
+0-9
+Prefix: NA
+Ex:int c=2345
+
+Hexadecimal
+0-9,A,B,C,D,E,F
+Prefix: 0x or 0X
+Ex:int b=0X234AB
+
+Note: Output always will be in decimal format
+
+Operators
+--------
+Logical Boolean Operator: & | ^
+Logical Bitwise operator:<< >> & | ^
+
+Left shift:<<
+->Convert to binary
+->Remove n symbol from left  and add n 0's at right
+->Convert to decimal
+
+Short circuit operator: && ||
+
+Ternary operator: exp1?exp2:exp3;
+Ex:
+int a = 20, b = 30, c;
+c = a > b ? a : b;
+System.out.println("Big is:" + c); //30
+
+a=a+2 or a+=2;
+
+Data types
+----------
+->To identify memory size and range 
+
+Types:
+Primitive/Primary Data types
+byte[1 bytes/0]
+short[2 bytes/0]
+int[4 bytes/0]
+long[8 bytes/0L]
+float[4 bytes/0.0f]
+double[8 bytes/0.0]
+char[2 bytes/' ']
+boolean[1 bit/false]
+
+User defined/Secondary Data types
+->No fixed memory size, depends on the data.
+->Default value is null
+
+public class Rough {
+
+	static String str;
+
+	public static void main(String[] args) {
+		System.out.println(str);//null
+
+	}
+
+}
+
+->To find the range
+public class Rough {
+	public static void main(String[] args) {
+		System.out.println(Byte.MIN_VALUE + " " + Byte.MAX_VALUE); //-128 to 127
+
+	}
+
+}
+
+************************************************************************************************************************************************************
+Day 32-34
+
+TYPECASTING
+===========
+->Converting data from one type to another type
+Types:
+Primitive Data Type Typecasting
+Userdefined Data Type Typecasting
+
+Primitive Data Type Typecasting
+-------------------------------
+Implicit/Widening
+Lower to Higher type conversion
+
+byte->short->int->long->float->double
+char->int
+
+->Compiler check type compatibility[Type checking], JVM assign vaues from RHS to LHS[Type casting].
+
+Higher <-Lower //No Error
+Ex:
+byte b=10;
+int i=b; 
+
+
+Explicit/narrowing
+Higher to Lower type conversion
+
+Lower <-Higher //CT Error
+Lower<-(X)Higher //X data type<=LHS data type
+Ex:
+int i=10;
+byte b=i; //CT Error, i>b
+byte b=(byte) i; 
+
+************************************************************************************************************************************************************
+Day 35-37
+
+CONDITIONAL STATEMENTS
+======================
+
+IF Statements
+-------------
+if(cond)
+{
+Statments
+}
+else if(cond)
+{
+Statments
+}
+else
+{
+Statments
+}
+
+->Local var should be initialized before use
+->Compiler will evaluate Constant condition, JVM will evaluate variable condition
+
+public class ConstantExpEvaluationByCompiler {
+
+	public static void main(String[] args) {
+		
+		int i=10,j;
+		
+		if(i==10)
+		{
+			j=20;
+		}
+		
+		System.out.println(j); //CT ERROR, there may be chances if block could fail and j may not get value
+
+	}
+
+}
+
+public class ConstantExpEvaluationByCompiler {
+
+	public static void main(String[] args) {
+
+		final int i = 10;
+		int j;
+
+		if (i == 10) { //Evaluated by Compiler
+			j = 20;
+		}
+
+		System.out.println(j); //20
+
+	}
+
+}
+
+Swith Statement
+---------------
+->byte,short,char,int,string Allowed data types
+
+switch( var)
+{
+case 1:
+Statement;
+break;
+
+case 1:
+Statement;
+break;
+
+default:
+Statement;
+
+}
+
+Ex:
+public class SwitchDemo {
+
+	public static void main(String[] args) {
+
+		int day = 2;
+
+		switch (day) {
+		case 1:
+			System.out.println("Monday");
+			break;
+
+		case 2:
+			System.out.println("Tuesday");
+			break;
+
+		case 3:
+			System.out.println("Wednesday");
+			break;
+
+		default:
+			System.out.println("Invalid");
+		}
+
+	}
+
+}
+
+************************************************************************************************************************************************************
+Day 38-41
+
+ITERATIVE STATEMENTS
+====================
+for/while/do while
+
+for(arrayDataType varname:refVarname)
+{
+}
+
+Ex:
+public class FoerEachDemo {
+
+	public static void main(String[] args) {
+		
+		int a[]= {2,3,4,5};
+		
+		for(int x:a)
+		{
+			System.out.println(x);
+		}
+
+	}
+
+}
+
+while(cond)
+{
+Statements
+}
+
+
+do
+{
+Statements
+}while(conditions);
+
+************************************************************************************************************************************************************
+Day 42
+
+TRANSFER STATEMENT
+==================
+break/continue/return
+
+->Bypass flow of exe from one isntauction to another instruction
+->break:Used inside Switch and Loops[Only for current loop in case of nested loops]
+->Labled break: To apply break to specific loop
+
+public class LabeledBreakStatement {
+
+	public static void main(String[] args) {
+		
+		l1:for(int i=0;i<10;i++)
+		{
+			for(int j=0;j<5;j++)
+			{
+				if(j==3)
+				{
+					break l1;
+				}
+				System.out.println(i+" "+j);
+			}
+		}
+
+	}
+
+}
+
+OUTPUT:
+0 0
+0 1
+0 2
+
+Same cases hold good for continue
+************************************************************************************************************************************************************
+Day 43-46
+
+ARRAYS
+======
+
+Single Dimension Array
+----------------------
+Syntax:
+
+dataype []var=new datatype[size];
+var[0]=val1;
+
+datatype []var={val1,val2};
+
+1D Array
+public class ArraySDemo {
+
+	public static void main(String[] args) {
+
+		int[] a = new int[5];
+		a[0] = 10;
+		a[1] = 20;
+		a[2] = 30;
+		a[3] = 40;
+		a[4] = 50;
+
+		for (int i = 0; i < a.length; i++) {
+			System.out.print(a[i] + " ");
+		}
+
+	}
+
+}
+
+Multi Dimension Array
+---------------------
+->Represent data in more than one dimension
+
+Syntax:
+int[][] a={{1,2,3},{4,5,6},{7,8,9}};
+
+int[][] a=new int[2][3];
+a[0][0]=10;
+a[0][1]=20;
+a[0][2]=30;
+
+a[1][0]=40;
+a[1][1]=50;
+a[1][2]=60;
+
+Ex:
+public class MultiDimenArray {
+
+	public static void main(String[] args) {
+
+		int[][] a = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+
+		for (int[] x : a) {
+			for (int y : x) {
+				System.out.print(y+" ");
+			}
+			System.out.println();
+		}
+	}
+
+}
+
+OUTPUT:
+1 2 3 
+4 5 6 
+7 8 9 
+
+public class MultiDimArray2 {
+
+	public static void main(String[] args) {
+
+		int[][] a = new int[2][3];
+		a[0][0] = 10;
+		a[0][1] = 20;
+		a[0][2] = 30;
+
+		a[1][0] = 40;
+		a[1][1] = 50;
+		a[1][2] = 60;
+
+		for (int[] x : a) {
+			for (int y : x) {
+				System.out.print(y + " ");
+			}
+			System.out.println();
+		}
+
+	}
+
+}
+
+OUTPUT:
+10 20 30 
+40 50 60 
+
+************************************************************************************************************************************************************
+Day 54
+
+OBJECT ORIENTED FEATURES OVERVIEW
+=================================
+Class/Object/Encapsulation/Abstraction/Inheritece/Polymorphism/Messsage passing
+
+CONTAINERS
+==========
+->Java elements contains Varibales,Blocks,Methods,...
+
+Types:
+Class/Abstract Class/Interface/Enum
+
+************************************************************************************************************************************************************
+Day 55
+
+CLASS
+=====
+->To represent entities
+Data->Variables
+Behaviour->Methods
+
+[access modifiers] class className [extends 0 or 1 Super Class] [implements 0 or N Interafces]
+{
+variables
+methods
+constructors
+blocks
+enums
+interfaces
+abstract classes
+classes
+}
+
+Access Modifiers
+----------------
+->To provide scopes and extra nature to programming elements
+
+Types
+Scopes AM[public/private/protected/default]
+Special power AM [static/final/volatile/abstract/native/synchronized/strictfp/...]
+
+public:can be accessed any where within the project
+protected:can be accessed in same package and child of other package
+default:can be accessed in same package
+private:can be accessed in same class
+
+->For outer class only public and default allowed
+->For inner class all 4 allowed
+->For outer class final,abstract and strictfp are allowed
+->For inner classs [static/final/abstarct/native/strictfp] are all allowed
+->Instance var can be accessed using ref var and static var can be accessed using ref var or class name
+
+Ex:
+class Employee {
+	int id = 100;
+	String name = "Appu";
+
+	public void display() {
+		System.out.println("Employee details");
+		System.out.println("Name:" + name);
+		System.out.println("ID:" + id);
+	}
+}
+
+public class ClassDemo {
+
+	public static void main(String[] args) {
+
+		Employee e1 = new Employee();
+		e1.display();
+
+	}
+
+}
+************************************************************************************************************************************************************
+Day 58
+
+METHODS
+=======
+->2 type[Concrete:Both declaration and body and Abstract:Only Declaration]
+->
+public void add(int a,int b)
+{
+}
+
+public abstract void add(int a, int b);
+
+->Con method avl in class and abstract classes, Abs method avl only in Interfaces
+
+ABSTRACT CLASS
+==============
+->Class contains 0 or N abstract and or concrete methods
+->Cannot create Object, only ref var declaration is avl
+->If we declare ref var for abstract class then we can able to access only abstract class memebers
+->If we declare ref for imp class then we can able to access members of both abstract and imp class
+->If any method has variable declaration for different classes then declare it as abstract method
+
+Ex:
+
+abstract class Student {
+	public abstract void mathsMarks();
+
+	public void scienceMarks() {
+		System.out.println("FC");
+	}
+}
+
+class Appu extends Student {
+	@Override
+	public void mathsMarks() {
+		System.out.println("FCD");
+	}
+
+	public void display() {
+		System.out.println("Result displayed");
+	}
+
+}
+
+public class AbstractClassDemo {
+
+	public static void main(String[] args) {
+
+		Student s = new Appu();
+		s.mathsMarks();
+		s.scienceMarks();
+
+		Appu a = new Appu();
+		a.mathsMarks();
+		a.scienceMarks();
+		a.display();
+
+	}
+
+}
+
+************************************************************************************************************************************************************
+Day 59
+
+INTERFACE
+=========
+->Contains 0 or N abstract methods, default methods, private methods and static methods
+->Cannot create Object
+->All variables are public static final, can be accessed through Interface name, Sub class name, reference variable
+->All methods are public and abstract
+
+interface Shapes {
+	int a = 10;
+	void display();
+
+}
+
+class Sub implements Shapes
+{
+
+	@Override
+	public void display() {
+		System.out.println("A value is:"+a);
+		
+	}
+	
+}
+public class InterfaceDemo {
+
+	public static void main(String[] args) {
+		
+		Shapes s=new Sub();
+		s.display();
+		System.out.println(s.a);
+		System.out.println(Shapes.a);
+
+	}
+
+}
+************************************************************************************************************************************************************
+Day 60
+
+METHODS
+=======
+
+[Access modifiers] returnType methodName([paramList]) [throws exceptionList]
+{
+...........
+...........
+...........
+[retrun value];
+
+}
+
+Access modifiers
+----------------
+->public,protected,default,private -only one allowed
+->static,final,abstract,volatile,native,synchronized and strictfp -multiple allowed
+Ex:static final void m1(){....}
+
+Return type
+-----------
+->All primitive, userdefined data type and void are allowed
+
+Paam list
+---------
+->All primitive, userdefined data type are allowed
+
+throws
+------
+->To bypass the exception from called function to calling function to handles it.
+
+Types
+-----
+->Accessor[getter():Used to get the data from the variables] and Mutator[setter():Used to set the data for the variables]
+
+Ex:
+class DataSetter {
+	private String name;
+	private int id;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+}
+
+public class GetterAndSetter {
+
+	public static void main(String[] args) {
+
+		DataSetter ds1 = new DataSetter();
+		ds1.setId(100);
+		ds1.setName("Appu");
+
+		DataSetter ds2 = new DataSetter();
+		ds2.setId(101);
+		ds2.setName("Shivu");
+
+		System.out.println("Details are:");
+		System.out.println(ds1.getId() + ":" + ds1.getName());
+		System.out.println(ds2.getId() + ":" + ds2.getName());
+
+	}
+
+}
+
+Variable Arg Method
+-------------------
+->Syntax
+
+returnType methodName(dataType...varName)
+{
+
+}
+
+->varName acts like an array element
+->Other parameter also allowed but it should be at begining
+void add(int x,int... i) 
+{
+}
+->Only one var arg parameter is allowed
+
+Ex:
+public class VarArgMethodDemo {
+
+	void add(int... i) {
+		System.out.println("Length is: " + i.length);
+		for (int x : i) {
+			System.out.print(x + " ");
+
+		}
+		System.out.println();
+
+	}
+
+	public static void main(String[] args) {
+
+		VarArgMethodDemo v = new VarArgMethodDemo();
+		v.add(1, 2, 3, 4);
+		v.add(1);
+		v.add();
+	}
+
+}
+
+OUTPUT:
+Length is: 4
+1 2 3 4 
+Length is: 1
+1 
+Length is: 0
+
+************************************************************************************************************************************************************
+Day 62
+
+OBJECT 
+======
+->To store instance var data in the heap memory and to access instance members.
+
+className refVarName=new className([parametervalues]);
+
+Ex:
+Employee employee=new Employee();
+
+Object creation process
+-----------------------
+Complie
+->For each and every class/enum/ac/interface seperate .class files will be generated
+
+Execute:
+->JVM will be activated
+->Loads required classes .class files into method area, create an object for java.lang.Class and stores all the meta data of the respective class into it.
+->Creates main thread to execute main method.
+->Main thread stack will be created in Stack area, for ech method seperate activation record will be created inside it[stores all the local var inside it]
+->JVM calculates memory required to store insatnce var data and inform to heap manager.
+->Heap manager, allocates free memory space in Heap memory and assign integer value to it known as Hash code
+->JVM will convert hash code to reference value and stores in reference variable
+->Rererence variable will be stored in Stack memory
+->JVM checks for instance var values inside class or constructor, if exist then stores into heap memory else loads default values
+->Instance var:Heap/Local var:Stack/Ref var:Stack
+
+->To get hashcode value and reference value
+ObjectDemo o = new ObjectDemo('A');
+System.out.println(o.hashCode());
+System.out.println(o);
+
+OUTPUT:
+125993742
+oops1.ObjectDemo@782830e
+
+
+Ex:
+class ObjectDemo {
+
+	int a;
+	String str = "Appu";
+	float f = 2.33f;
+	char c;
+	int x = 100;
+
+	ObjectDemo(char c) {
+		f = 3.33f;
+		this.c = c;
+	}
+
+	public void display() {
+		int x = 10;
+
+		System.out.println(a);
+		System.out.println(str);
+		System.out.println(f);
+		System.out.println(c);
+		System.out.println(x);
+	}
+
+}
+
+public class ObjectCreation {
+
+	public static void main(String[] args) {
+
+		ObjectDemo o = new ObjectDemo('A');
+		o.display();
+
+	}
+
+}
+
+OUTPUT:
+0
+Appu
+3.33
+A
+10
+
+Object Types
+------------
+Mutable and Immutable Objects
+->Mutable Object: Allows modification on data in same memory Ex:StringBuffer
+->Immutable Obejct:Not allows modification on data in same memory, if performed new memory will be created and stores modifed data there Ex:String
+
+Ex:
+
+public class MutableVsImmutableObjects {
+
+	public static void main(String[] args) {
+
+		String str1 = new String("Punith");
+		String str2 = str1.concat("Rajkumar");
+		System.out.println(str1);
+		System.out.println(str2);
+		System.out.println(str1.hashCode());
+		System.out.println(str2.hashCode());
+
+		System.out.println("***************************");
+
+		StringBuffer sb1 = new StringBuffer("Punith");
+		StringBuffer sb2 = sb1.append("Rajkumar");
+		System.out.println(sb1);
+		System.out.println(sb2);
+		System.out.println(sb1.hashCode());
+		System.out.println(sb2.hashCode());
+	}
+
+}
+
+OUTPUT:
+Punith
+PunithRajkumar
+-1893201644
+-255794771
+***************************
+PunithRajkumar
+PunithRajkumar
+1910163204
+1910163204
+
+Object vs Instance
+------------------
+->Instance:Object at any specific point of time
+************************************************************************************************************************************************************
+Day 65
+
+CONSTRUCTORS
+============
+->Used to create object and initialize instance variable data while creating an object itself.
+->Executed at time of creating object
+->No return type and name same as class name.
+->Allows public,private,default,protected,throws.
+->static,final,abstract,...not allowed
+->Cannot be overrided, can be overloaded
+->If we create private consructor then we cannot able to create object outside of the class
+
+Syntax
+------
+[accessModifiers] className ([parameterList])
+{
+}
+
+Types
+-----
+Contructor [Default:zero arg and User defined: zero arg/parameterized const]
+
+Default Constructor:If dev not explicitly speified the constructor then compiler will create one default zero arg constructor.
+User def Constructor: Constructor provided by Dev with or without arguement
+************************************************************************************************************************************************************
+Day 66
+
+INSTANCE CONTEXT
+================
+->While loading .class file to memory by JVM, static context will be created. 
+->When Object is created [Constructor executed], Instance context will be created.
+
+Instance variables
+------------------
+->Non static class level variables
+->Variables types[Local[Stack] and Class level [Static[Method area]/Non Static or Instance[Heap]]
+->Instance variables will be stored in heap memory
+->In current class we can access instance variables directly, but from other class we need to create an Object.
+->If we access instance var using ref var containing null value then it throws null pointer exception
+->For every object seperate copy of instance var data will be created
+->Instance var are recognized and executed just before executing constructor.
+
+Ex: Static context vs Instance context
+
+class Instance {
+	static int a;
+	int b;
+
+}
+
+public class InstanceContext {
+
+	public static void main(String[] args) {
+
+		Instance i1 = new Instance();
+		Instance i2 = new Instance();
+
+		i1.a = 100;
+		i1.b = 200;
+		System.out.println(i1.a + " " + i1.b);
+
+		i2.a = 10;
+		i2.b = 20;
+		System.out.println(i2.a + " " + i2.b);
+
+		System.out.println(i1.a + " " + i1.b);
+
+		i2 = null;
+		i2.a = 200;
+
+	}
+
+}
+
+OUTPUT:
+100 200
+10 20
+10 200
+
+Instance methods
+----------------
+->Non static method inside the class
+->In current class we can access instance method directly, but from other class we need to create an Object.
+->If we access instance method using ref var containing null value then it throws null pointer exception
+
+Insatnce block
+--------------
+->Instance block are recognized and executed just before executing constructor.
+Syntax:
+{
+..............
+..............
+}
+
+
+Flow of Exe:
+Inst Block or var [FCFS]
+Const1
+Inst Block or var [FCFS]
+Const2
+
+************************************************************************************************************************************************************
+Day 67
+
+THIS KEYWORD
+============
+->To refer current class object/members
+->Used to refer [Current class variables/methods/constructor] and to return current class object
+
+To refer current class variables
+--------------------------------
+->this.varName
+->Var search:Local>Class>Super Class>Object Else Error
+
+class This {
+	int a = 10;
+
+	void m1() {
+		int a = 20;
+		System.out.println(a);
+		System.out.println(this.a);
+	}
+}
+
+public class AccesVarUsingThis {
+
+	public static void main(String[] args) {
+
+		This t = new This();
+		t.m1();
+
+	}
+
+}
+
+OUTPUT:
+20
+10
+
+To refer current class constructor
+----------------------------------
+->this([paramList]);
+->Can be used only inside constructor and shoulb be in first statement only
+
+class This1 {
+	This1() {
+		this(10);
+		System.out.println("Zero Arg COnst");
+	}
+
+	This1(int a) {
+		this(12.3f, 11.4f);
+		System.out.println("Int Arg COnst");
+	}
+
+	This1(float f, float y) {
+		System.out.println("Float Arg COnst");
+	}
+
+}
+
+public class ReferCurrentClassCOnstUsingThis {
+
+	public static void main(String[] args) {
+		This1 t = new This1();
+
+	}
+
+}
+
+
+OUTPUT:
+Float Arg COnst
+Int Arg COnst
+Zero Arg COnst
+
+To return current class object from the method
+----------------------------------------------
+->How many time JVM executes new Keyword that number of times object will be created.
+
+class This2 {
+	This2 getRef() {
+		return this;
+	}
+
+	void disp() {
+		System.out.println("This 2 Class");
+	}
+}
+
+public class ReturnCurrentClassObjectUsingThis {
+
+	public static void main(String[] args) {
+
+		This2 t = new This2();
+		System.out.println(t);
+		t.disp();
+
+		This2 t1 = t.getRef();
+		System.out.println(t1);
+
+	}
+
+}
+
+OUTPUT:
+oops1.This2@5d22bbb7
+This 2 Class
+oops1.This2@5d22bbb7
+
+************************************************************************************************************************************************************
+STATIC KEYWORD
+==============
+->Static variable/Method/Block/Import
+
+Static variables
+----------------
+->Recognized and Initialized while loading .class file into method area.
+->Same value will be shared with all the Objects
+->Modification from one object will be reflected to all the objects.
+->Static variables should be declared at class level, Local var cannot be static variables
+->Can be accessed using reference variable or through class name
+->No null pointer exception
+->Can be accessed using this keyword
+->Same value to be shared across all the objects then store it in static variable
+->Class specific
+
+->We can able to access static variables directly in both instance and static method. but instance variables can be accessed only inside instance method.If we want to access instance variables inside static method we need to create an object and access.
+
+Ex:
+class Static {
+	static int a = 10;
+	int b = 20;
+
+	void m1() {
+		System.out.println(a);
+		System.out.println(b);
+	}
+
+	static void m2() {
+		System.out.println(a); 
+		System.out.println(b); //ERROR
+	}
+}
+
+SOLUTION
+
+class Static {
+	static int a = 10;
+	int b = 20;
+
+	void m1() {
+		System.out.println(b);
+		System.out.println(a);
+	}
+
+	static void m2() {
+		
+		Static s=new Static();
+		System.out.println(s.b); //NO ERROR
+		System.out.println(a);
+	}
+}
+
+Static Methods
+--------------
+->Can contains only static members of the current class.
+->We can access instance members by creating object, but cant contain in it.
+->No null pointer exception
+->Not allow this keyword in their body but we can use this keyword to access current class static methods.
+
+Ex:
+class Static {
+	static int a = 10;
+	int b = 20;
+
+	void m1() {
+		System.out.println(b);
+		System.out.println(a);
+	}
+
+	static void m2() {
+		
+		Static s=new Static();
+		System.out.println(s.b);
+		System.out.println(a);
+		this.m1();
+	}
+}
+
+Static Block
+------------
+->Recognized and initialized when loading .class file into memory.
+->Contains only static members of the current class
+->We can access instance members by creating object, but cant contain in it.
+->Not allow this keyword in their body but we can use this keyword to access current class static methods.
+
+Ex:
+public class StaticBlock {
+
+	int a = 10;
+	static int j = 100;
+	static {
+		System.out.println("Welcome");
+		System.out.println(j);
+
+		StaticBlock sb = new StaticBlock();
+		System.out.println(sb.a);
+	}
+
+	public static void main(String[] args) {
+
+	}
+}
+
+Static Import
+-------------
+->If we want to access any static members of any class in present java file without class name or refrence variable then we need to do static import.
+->Just import, we can access static members using class name or creating ref var, but if we do static import then we can directly access without class name or ref var
+
+import static packageName.className.memberName;
+import static packageName.className.*;
+
+Ex:
+package Programs;
+
+public class StaticClass {
+
+	public static int a=100;
+	
+	public static void dispaly()
+	{
+		System.out.println("Static");
+	}
+}
+
+package oops1;
+
+import static Programs.StaticClass.*;
+
+public class StaticImport {
+
+	public static void main(String[] args) {
+		System.out.println(a);
+		dispaly();
+
+	}
+
+}
+
+***********************************************************************************************************************************************************
+STATIC CONTEXT
+==============
+->Static var and blocks will be recognized and initialized when loading .class file to memory and only once per class.
+->When Object created
+Class byte code will be loaded to memory
+Static context will be executed
+Instance context will be executed
+Constrcutor will be executed
+
+
+Static var/blocks
+Instance var /blocks
+Constructor
+Instance var /blocks
+Constructor
+
+Ex:
+class SIContext {
+	static {
+		System.out.println("SB");
+	}
+	static int a = m1();
+
+	static int m1() {
+		System.out.println("SM");
+		return 10;
+	}
+
+	int b = m2();
+
+	{
+		System.out.println("IB");
+	}
+
+	int m2() {
+		System.out.println("IM");
+		return 20;
+	}
+
+}
+
+public class StaticInsatnceContext {
+
+	public static void main(String[] args) {
+		SIContext s1 = new SIContext();
+		SIContext s2 = new SIContext();
+
+	}
+
+}
+
+OUTPUT:
+SM
+SB
+IM
+IB
+IM
+IB
+
+************************************************************************************************************************************************************
+Day 70
+
+CLASS.FORNAME()
+=============
+->When creating obj to the class, byte code will be loaded to the memory. But to load byte code to memory without creating Object to the class we can use 
+forName()
+->Loads class byte code and execute static context.
+
+public static Class forName(String className) throws ClassNotFoundException
+{
+}
+
+class ForName {
+
+	ForName() {
+		System.out.println("Const");
+	}
+
+	static {
+		System.out.println("SB");
+		// System.out.println(a);
+	}
+
+	static int a = m1();
+
+	static int m1() {
+		System.out.println("M1");
+		return 10;
+	}
+}
+
+public class ForNameMethodDemo {
+
+	public static void main(String[] args) throws ClassNotFoundException {
+
+		Class cls=Class.forName("oops1.ForName");
+		System.out.println(cls.getName());
+	}
+
+}
+
+OUTPUT:
+SB
+M1
+oops1.ForName 
+
+***********************************************************************************************************************************************************
+NEWINSTANCE()
+=============
+->If we load byte code for any class using forName() and to create an object for the class then we will use newInsatnce()
+
+public Object newInsatnce() throws Instattiation,IllegalAccessExceptio
+{
+}
+
+Ex:
+class ForName {
+
+	ForName() {
+		System.out.println("Const");
+	}
+
+	static {
+		System.out.println("SB");
+		// System.out.println(a);
+	}
+
+	static int a = m1();
+
+	static int m1() {
+		System.out.println("M1");
+		return 10;
+	}
+
+	int b = m2();
+
+	{
+		System.out.println("IB");
+	}
+
+	public int m2() {
+		System.out.println("M2");
+		return 20;
+	}
+}
+
+public class ForNameMethodDemo {
+
+	public static void main(String[] args)
+			throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+		Class cls = Class.forName("oops1.ForName");
+		System.out.println(cls.getName());
+
+		Object obj = cls.newInstance();
+
+	}
+
+}
+
+
+OUTPUT:
+SB
+M1
+oops1.ForName
+M2
+IB
+Const
+
+************************************************************************************************************************************************************
+Day 71
+
+SINGLETON CLASS
+===============
+->Any class allows to create single object 
+
+Ex:Private Constructor
+
+class Temp {
+	private Temp() {
+
+	}
+
+	void m1() {
+		System.out.println("M1");
+	}
+
+	static Temp getRef()
+	{
+		return new Temp();
+	}
+}
+
+public class PrivateCostructor {
+
+	public static void main(String[] args) {
+		 Temp.getRef().m1();
+
+	}
+
+}
+
+->Factory method design pattern: Method which return class reference value
+->Types:Static and Instance factory method
+
+Ex:
+	static Temp getRef()
+	{
+		return new Temp();
+	}
+
+Ex:Singleton Class Case 1
+class Sigleton {
+
+	private Sigleton() {
+
+	}
+
+	static Sigleton s = null;
+
+	static Sigleton getRef() {
+		if (s == null) {
+			s = new Sigleton();
+		}
+		return s;
+
+	}
+
+}
+
+public class SingleTonClass {
+
+	public static void main(String[] args) {
+
+		Sigleton s1 = Sigleton.getRef();
+		Sigleton s2 = Sigleton.getRef();
+
+		System.out.println(s1);
+		System.out.println(s2);
+
+	}
+
+}
+
+OUTPUT:
+oops1.Sigleton@5d22bbb7
+oops1.Sigleton@5d22bbb7
+
+Ex:Singleton Class Case 2
+class SingletonDemo {
+
+	private SingletonDemo() {
+
+	}
+
+	static SingletonDemo s = null;
+
+	static {
+		s = new SingletonDemo();
+	}
+
+	static SingletonDemo getRef() {
+		return s;
+	}
+}
+
+public class SingletonCase2 {
+
+	public static void main(String[] args) {
+
+		System.out.println(SingletonDemo.getRef());
+		System.out.println(SingletonDemo.getRef());
+	}
+
+}
+************************************************************************************************************************************************************
+Day 72
+
+FINAL KEYWORD
+============
+->Final variable:No modification/Should be initialized/Constant variable/can be accessed using reference var or class name
+->Final method:No Overriding
+->Final class:No Inheritance
+
+->Declare constant variable as 
+public static final dataType varName=value;
+public static final int a=100;
+
+
+Ex:
+
+final class College {
+
+        final int a=100;
+	final public void display() {
+		System.out.println("College");
+	}
+}
+
+class Clas extends College {
+	@Override
+	public void display() {
+		System.out.println("Class");
+	}
+}
+
+public class FinalMethod {
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}
+
+***********************************************************************************************************************************************************
+ENUM
+====
+->Container used to declare constant variables
+->All constant avr by default are public static final
+->All constant avr are enum type by default
+->All constant variables are named constant variables, it dispalys names when we accessed
+->No Inheritance
+->Inside enum we can declare normal methods, var, cons along with constant variables.
+
+Syntax:
+[Access modifiers] enum enumName
+{
+List of constants
+}
+
+AM:public/private/default/protected
+
+enum EnumDemos
+{
+	AVAILABLE,BUSY;
+}
+public class EnumDemo {
+
+	public static void main(String[] args) {
+		System.out.println(EnumDemos.AVAILABLE);
+		System.out.println(EnumDemos.BUSY);
+
+	}
+
+}
+
+OUTPUT:
+AVAILABLE
+BUSY
+
+Ex:
+enum EnumDemo2 {
+
+	A(111), B(222);
+
+	private int price;
+
+	EnumDemo2(int price) {
+		this.price = price;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println(EnumDemo2.A.getPrice());
+		System.out.println(EnumDemo2.B.getPrice());
+
+	}
+
+}
+
+OUTPUT:
+111
+222
+
+************************************************************************************************************************************************************
+Day 73
+
+MAIN METHODS
+============
+->Conventional method
+
+public static void main (String[] args)
+{
+}
+
+************************************************************************************************************************************************************
+Day 74,75,78
+
+RELATIONSHIP IN JAVA
+====================
+HAS-A : Association
+IS-A:Inheritance
+
+************************************************************************************************************************************************************
+Day 78
+
+INHERITANCE
+===========
+->One class[Sub Class] make using another class[Super Class] members without creating an object.
+->Using Sub class ref var we can access both Super and Subclass memebrs, but using Super class ref var we can access only Super class memebrs.
+->Code reusability.
+->Multiple/Hybrid Inheritance is not possible due to ambiguity problem
+
+Types
+-----
+->Single
+->Multilevel
+->Hierarcical
+
+class Employee {
+	int id = 100;
+	String name = "Appu";
+
+}
+
+class Appu extends Employee {
+	void display() {
+		System.out.println("Name is: " + name);
+		System.out.println("ID is: " + id);
+	}
+
+}
+
+public class InheritanceDemo {
+
+	public static void main(String[] args) {
+		
+		Appu a=new Appu();
+		a.display();
+		a.name="Shivu";
+		a.display();
+
+	}
+
+}
+
+OUTPUT:
+Name is: Appu
+ID is: 100
+Name is: Shivu
+ID is: 100
+
+Static Instance Context Execution
+---------------------------------
+->JVM loads both Super and Sub class byte code to memory.
+NOTE:Static context will be exe only once per class when object for the class is created, Instance context will be executed for each object creation.
+First Super class then Subclass.
+
+
+Super class Static var/block
+Sub class Static var/block
+
+Super class ins var/block
+Super class const
+Sub class ins var/block
+Sub class const
+
+Super class ins var/block
+Super class const
+Sub class ins var/block
+Sub class const
+
+
+Ex:
+class A {
+
+	A() {
+		System.out.println("Super class Constructor");
+	}
+
+	static int a = m1();
+	static {
+		System.out.println("Super Class  SB");
+	}
+
+	static int m1() {
+		System.out.println("Super Class SM");
+		return 100;
+	}
+
+	int b = m2();
+	{
+		System.out.println("Super Class IB");
+	}
+
+	int m2() {
+		System.out.println("Super Class IM");
+		return 100;
+	}
+}
+
+class B extends A {
+
+	B() {
+		System.out.println("Sub class Constructor");
+	}
+
+	static int x = p1();
+	static {
+		System.out.println("Sub Class SB");
+	}
+
+	static int p1() {
+		System.out.println("Sub Class SM");
+		return 100;
+	}
+
+	int b = p2();
+	{
+		System.out.println("Sub Class IB");
+	}
+
+	int p2() {
+		System.out.println("Sub Class IM");
+		return 100;
+	}
+}
+
+public class StaticInstanceContextExeInInheritance {
+
+	public static void main(String[] args) {
+
+		B b1 = new B();
+		System.out.println("**************************");
+		B b2 = new B();
+
+	}
+
+}
+
+OUTPUT:
+Super Class SM
+Super Class  SB
+Sub Class SM
+Sub Class SB
+Super Class IM
+Super Class IB
+Super class Constructor
+Sub Class IM
+Sub Class IB
+Sub class Constructor
+**************************
+Super Class IM
+Super Class IB
+Super class Constructor
+Sub Class IM
+Sub Class IB
+Sub class Constructor
+************************************************************************************************************************************************************
+Day 80
+
+SUPER KEYWORD
+=============
+->Super keyword is use to refer super class memebrs.[variables/methods/constructors]
+->This keyword use to refer current class memebrs.[variables/methods/contructors/return current class obj ref]
+
+To refer super class var/method/constructor 
+------------------------
+->super.variableName
+->super.methodName()
+->super([paramList]) / should be in first line of the constructor
+
+->If parent and child relationship exist then child class super() should match with parent class constructor
+
+Flow:super class constructor>child class constructor
+
+parent()
+{}
+child()
+{
+super() //Works fine
+}
+
+parent(int 10)
+{}
+child()
+{
+super(); //ERROR , not matching with parent class const arg , Solution: use super(10)
+}
+
+
+->Var/Method preference [local>class>super class>object class]
+
+Ex:
+class Demo {
+	int a = 20;
+	public int i;
+
+	void m1() {
+		System.out.println("Super class M1");
+	}
+
+	Demo(int a) {
+		System.out.println("Super class constructor");
+	}
+}
+
+class Demo1 extends Demo {
+	int a = 30;
+
+	void m1() {
+		int a = 100;
+		super.i = 200;
+		super.m1();
+		System.out.println(a);
+		System.out.println(this.a);
+		System.out.println(super.a);
+		System.out.println("Sub class M1");
+	}
+
+	Demo1() {
+		super(22);
+		System.out.println("Sub class constructor");
+	}
+
+}
+
+public class SuperKeywordDemo {
+
+	public static void main(String[] args) {
+
+		Demo1 d = new Demo1();
+		d.m1();
+	}
+
+}
+
+OUTPUT:
+Super class constructor
+Sub class constructor
+Super class M1
+100
+30
+20
+Sub class M1
+
+************************************************************************************************************************************************************
+CLASS LEVEL TYPE CASTING
+========================
+

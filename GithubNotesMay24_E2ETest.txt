@@ -51,10 +51,10 @@ git diff <first 6 digit of commit id> <first 6 digit of commit id>
 
 GITHUB
 ======
-Nandeesh-Appu
+clnandeesh
 Apjkalam!123
 https://github.com/login
-https://github.com/Nandeesh-Appu/Testing-Notes-2024.git
+https://github.com/CLNandeesh/Testing-Notes-2024
 
 FLOWS
 -----
@@ -67,13 +67,30 @@ remote repo--git fetch-->local repo
 git clone <url>
 
 //To push code from local repo to remote repo
-git push origin master
-
+git push origin main
 
 //To get remote repo details
 git config --get remote.origin.url
 
 //Git clone VS Git pull
+Git clone:To pull new repo to local repo
+Git pul:Repo already exited but need to update it
 
-//To link local and remote repo
+->Always pull before push to get latest changes
+If there is new in remote and not avl in local
+If we try to push then it throws error
+Pull latest code from remote to local and then push 
+to push any code both remote and local commit should be same 
 
+//To Pull latest code from remote to local repo
+git pull
+
+//To push fresh local repo into fresh remote repo
+Create local repo
+Create remote repo
+Add local to remote
+  git remote add origin <new repo url>
+Push the changes from local to remote
+  git push origin main
+
+//

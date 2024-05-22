@@ -34,6 +34,9 @@ Class/Abstract Class/Interface
 31.CLASS LEVEL TYPE CASTING
 32.POLYMORPHISM
 33.ABSTRACT CLASS
+34.WRAPPER CLASS
+35.PACKAGES
+
 
 
 ************************************************************************************************************************************************************
@@ -2393,6 +2396,7 @@ ABSTRACT CLASS
 ->One abstract class can extend other abstract class
 ->One abstract class can extend other normal class
 ->One abstract class can provide body for abstract method of another abstarct class, if that done then no need of imp class to provide body again.Imp class will be used only for creating object.
+->Constructor is needed for Ac to execute instance context
 
 Ex:
 abstract class Abstract1 {
@@ -2504,5 +2508,74 @@ Abstract1 Constructor
 Abstract Implement M1
 Abstract1 M2
 
+************************************************************************************************************************************************************
+Day 94
+
+WRAPPER CLASS
+=============
+->Collection is an object used to store group of other objects, to store primitive data into collection it has to be converted to object type with help of Wrapper class.
+
+Primitive data->[Wrapper class]->Object type->Store in Collection->Fetch Object type data from COllection->Covert to Primitive type->Use Prmitive data
+
+Primitive type->Object Type                                Object type->Primitive type
+ int i=10->Integer in=10        ->Store in in Collection->   Integer in=10->int i=10
+
+->Wrapper class objects are Immutable objects
+
+Ex:java.lang.Integer
+To convert int to Integer
+
+Conversion
+-----------
+->Primitive to Object 
+int i=10;
+Ineteger in=i;
+
+->Object to Primitive
+Integer in=new Ineteger(10);
+int i=in;
+
+->String to Object
+String st="10";
+Integer in=Integer.valueOf(st);
+
+->Object to String
+Integer in=new Ineteger(10);
+String st=in.toString(); OR
+String st=in+"";
+
+->Primitive to String
+int i=10;
+String st=Integer.toString(i); OR
+String st=i+" ";
+
+->String to Primitive
+String st=10;
+int i=Integer.parseInt(i);
+
+************************************************************************************************************************************************************
+Day 95
+
+PACKAGES
+========
+->Collection of related classes and interfaces as single unit
+->Folder contains .class files representing related classes and interfaces.
+
+Ex:java.lang/java.util....
+
+->package name format
+companyDomainNameInReverse.projectName.moduleName.subModuleName;
+com.ibm.ivr.facilityinquiry
 
 
+->To import package
+import java.util.*;
+import java.util.ArrayList;
+
+Makes available the package to present java file, compiler checks is that package exist in java software, jvm loads to memory needed classes and interfaces.
+
+->Fully Qualified Name:
+packagename.membername
+Ex:java.util.ArrayList list=new java.util.ArrayList(); //No need to import the java.util package 
+
+************************************************************************************************************************************************************

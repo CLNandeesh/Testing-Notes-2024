@@ -2101,6 +2101,126 @@ Sub class M1
 ************************************************************************************************************************************************************
 Day 80
 
-CLASS LEVEL TYPE CASTING
-========================
+CLASS LEVEL TYPE CASTING[User defined]
+======================================
 
+->Type Casting:Convert data from one type to another type
+->Type checking will be done by Compiler and JVM will does type casting [Assign RHS type to LHS and assign RHS var valu to LHS var].
+
+Primitive
+  Implicit:Lower to higher
+  Explicit:Higher to lowe using cast operator
+
+User defined
+  Upcasting:Assign sub class ref value to Super class ref var
+  Downcasting:Assign super class ref value to sub class ref var using cast opertor
+
+
+Upcasting
+---------
+->Assign sub class ref value to Super class ref var.With this super class ref var we can access only super class methods. If we overrided super class method in sub class then we get sub class body not super class body[method overriding].
+->Used to Method overriding
+
+
+Ex:
+
+class X {
+	void m1() {
+		System.out.println("Super M1");
+	}
+
+	void m2() {
+		System.out.println("Super M2");
+	}
+}
+
+class Y extends X {
+	@Override
+	void m1() {
+		// super.m1();
+		System.out.println("Sub M1");
+	}
+
+	void m3() {
+		System.out.println("Sub M3");
+	}
+}
+
+public class Upcasting {
+
+	public static void main(String[] args) {
+
+		X x1 = new X();
+		x1.m1();
+		x1.m2();
+		System.out.println("*************************");
+
+		X x2 = new Y(); // Upcasting
+		x2.m1();
+		x2.m2();
+
+		System.out.println("*************************");
+		Y y = new Y();
+		y.m1();
+		y.m2();
+		y.m3();
+
+	}
+
+}
+
+OUTPUT:
+Super M1
+Super M2
+*************************
+Sub M1
+Super M2
+*************************
+Sub M1
+Super M2
+Sub M3
+
+Downcasting
+-----------
+->Assign super class ref value to sub class ref var using cast opertor
+->Cant able to access any members using this ref var it will throw Class cast exception
+
+Ex:
+class P {
+	void m1() {
+		System.out.println("Super M1");
+	}
+
+	void m2() {
+		System.out.println("Super M2");
+	}
+}
+
+class Q extends P {
+	@Override
+	void m1() {
+		// super.m1();
+		System.out.println("Sub M1");
+	}
+
+	void m3() {
+		System.out.println("Sub M2");
+	}
+}
+
+public class DowncastingDemo {
+
+	public static void main(String[] args) {
+
+		Q q = (Q) new P();
+		q.m2();
+
+	}
+
+}
+
+OUTPUT:
+Exception in thread "main" java.lang.ClassCastException: class oops2.P cannot be cast to class oops2.Q (oops2.P and oops2.Q are in unnamed module of loader 'app')
+	at oops2.DowncastingDemo.main(DowncastingDemo.java:29)
+
+************************************************************************************************************************************************************

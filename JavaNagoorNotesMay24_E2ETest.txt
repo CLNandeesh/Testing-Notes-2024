@@ -32,6 +32,8 @@ Class/Abstract Class/Interface
 29.INHERITANCE
 30.SUPER KEYWORD
 31.CLASS LEVEL TYPE CASTING
+32.POLYMORPHISM
+33.ABSTRACT CLASS
 
 
 ************************************************************************************************************************************************************
@@ -61,7 +63,7 @@ Architecture neutral PL [Hardware neutral]
 ->1996 Jan 27 Java 1.0/JDK 1.0
 
 ************************************************************************************************************************************************************
-Day 4,5,6,7,8,9
+Day 4
 
 DIFFERENCE BETWEEN JAVA AND OTHERS
 ==================================
@@ -127,7 +129,7 @@ boolean 1 bit
 ->In Java all character are represented inform of UNICODE [Represent all the natural lang characters]
 
 ************************************************************************************************************************************************************
-Day 10,11,12
+Day 10
 
 JAVA FEATURES
 =============
@@ -148,7 +150,7 @@ Package-Lower case
 Constants-Upper case
 
 ************************************************************************************************************************************************************
-Day 13,14,15
+Day 13
 
 JAVA PROGRAMMING FORMAT
 =======================
@@ -214,8 +216,7 @@ Main Class
 ->Contains App Logic, executed by JVM automatically
 ->Start and End point of the Program execution
 ************************************************************************************************************************************************************
-
-Day 17-22
+Day 17
 
 FIRST JAVA APPLICATION
 ======================
@@ -255,7 +256,7 @@ Execute
 ->After execution all the resouce will be released and thread will move to dead state
 
 ************************************************************************************************************************************************************
-Day 24-31
+Day 24
 
 LANGUAGE FUNDAMENTALS
 ====================
@@ -359,7 +360,7 @@ public class Rough {
 }
 
 ************************************************************************************************************************************************************
-Day 32-34
+Day 32
 
 TYPECASTING
 ===========
@@ -395,7 +396,7 @@ byte b=i; //CT Error, i>b
 byte b=(byte) i; 
 
 ************************************************************************************************************************************************************
-Day 35-37
+Day 35
 
 CONDITIONAL STATEMENTS
 ======================
@@ -500,7 +501,7 @@ public class SwitchDemo {
 }
 
 ************************************************************************************************************************************************************
-Day 38-41
+Day 38
 
 ITERATIVE STATEMENTS
 ====================
@@ -575,7 +576,7 @@ OUTPUT:
 
 Same cases hold good for continue
 ************************************************************************************************************************************************************
-Day 43-46
+Day 43
 
 ARRAYS
 ======
@@ -2104,6 +2105,18 @@ Day 80
 CLASS LEVEL TYPE CASTING[User defined]
 ======================================
 
+Object for Sub Class/Ref var for Sub class
+ All members of Sub and Super class
+
+Object for Super Class/Ref var for Super class
+ All members of Super class
+
+Object for Sub Class/Ref var for Super class [Upcasting]
+ All members of Super class, If any method is overrided then we get Sub class body for it.If we want body of Super class then use super.methodName()
+
+Object for Super Class/Ref var for Sub class [Downcasting]
+ Cant access any memebrs, it throws Classcast exception
+
 ->Type Casting:Convert data from one type to another type
 ->Type checking will be done by Compiler and JVM will does type casting [Assign RHS type to LHS and assign RHS var valu to LHS var].
 
@@ -2111,7 +2124,7 @@ Primitive
   Implicit:Lower to higher
   Explicit:Higher to lowe using cast operator
 
-User defined
+->User defined/Class level type casting
   Upcasting:Assign sub class ref value to Super class ref var
   Downcasting:Assign super class ref value to sub class ref var using cast opertor
 
@@ -2224,3 +2237,272 @@ Exception in thread "main" java.lang.ClassCastException: class oops2.P cannot be
 	at oops2.DowncastingDemo.main(DowncastingDemo.java:29)
 
 ************************************************************************************************************************************************************
+Day 84
+
+POLYMORPHISM
+============
+->Types
+	Static Polymorphism:Occurs at Compilation time Ex:Method overloading
+	Dynamic Polymorphism:Occurs at runtime Ex:Method overriding
+
+Method overloading
+-------------------
+->Two or more methods having same name but different parameter list [Parameter data type/Number of parameters/Parameters order]
+
+Ex:
+class MOD {
+	int add(int a, int b) {
+		return a + b;
+	}
+
+	int add(int a, int b, int c) {
+		return a + b + c;
+	}
+
+	float add(float a, float b) {
+		return a + b;
+	}
+	
+	float add(int a, float b) {
+		return a + b;
+	}
+	
+	float add(float a, int b) {
+		return a + b;
+	}
+
+}
+
+public class MethodOverloadingDemo {
+
+	public static void main(String[] args) {
+		MOD m = new MOD();
+		System.out.println(m.add(22.45f, 33.44f));
+		System.out.println(m.add(11, 22));
+
+	}
+
+}
+
+
+OUTPUT:
+55.89
+33
+
+Method Overriding
+-----------------
+->Providing new functionality for the method avl in Super class in sub class.
+->Procedure:
+ Create method in Paarent class ex:dispaly()
+ Give new functionality in child class for the same method.
+ Create object for child class and reference var for parent class Ex:MethodOverriding m = new Child(); // METHOD OVERRIDING
+ Call the method Ex:m.display()
+   ->We get body of child class. Ex:Sub class
+
+Ex:
+
+class Parent {
+	public void dispaly() {
+		System.out.println("Super class");
+	}
+}
+
+class Child extends Parent {
+	@Override
+	public void dispaly() {
+		System.out.println("Sub class");
+	}
+}
+
+public class MethodOverridingDemo {
+
+	public static void main(String[] args) {
+		Child c = new Child();
+		c.dispaly(); //Sub class
+		System.out.println("*******************");
+
+		Parent p1 = new Parent();
+		mo.dispaly(); //Super class
+		System.out.println("*******************");
+
+		Parent p2 = new Child(); // METHOD OVERRIDING
+		m.dispaly(); //Sub class
+
+		System.out.println("*******************");
+	}
+
+}
+
+OUTPUT:
+Sub class
+*******************
+Super class
+*******************
+Sub class
+*******************
+
+Rules and regulations
+---------------------
+->Sub class method return type should be same as super class method return type
+->Sub class Access modifier should be same or greater than super class method [protected>default>public]
+->Private methods cannot be overrided
+->Final methods cannot be overrided, Super class method cannot be final, Sub class methods can be final.
+->Static method cannot be overrided. If either super or sub or both  declared as static then method overriding is not possible.
+  If super or sub is static then compiler will raise an error
+  If both static we wont get compilation error but it will not be method overriding, it is method hiding. Super class hides su class method. We get output of super class method not sub class method.
+
+Ex:
+class Parent {
+	public static void dispaly() {
+		System.out.println("Super class");
+	}
+}
+
+class Child extends Parent {
+	// @Override
+	public static void dispaly() {
+		System.out.println("Sub class");
+	}
+}
+
+public class MethodOverridingDemo {
+
+	public static void main(String[] args) {
+		Parent p = new Child();
+		p.dispaly(); //Super class
+
+	}
+
+}
+
+************************************************************************************************************************************************************
+Day 85
+
+Abstract Method
+----------------
+->Method without body with keyword abstarct
+->Abstract method should be in Abstract class 
+
+ABSTRACT CLASS
+==============
+->Class contains 0 to N abstract/concrete methods
+->Class with keyword abstarct
+->Cannot create object, can create only ref var
+->Implementation class should provide body for all the methods else that clas will also be abstract.We can create obj only for comple class.
+->Can contain constructor
+->One abstract class can extend other abstract class
+->One abstract class can extend other normal class
+->One abstract class can provide body for abstract method of another abstarct class, if that done then no need of imp class to provide body again.Imp class will be used only for creating object.
+
+Ex:
+abstract class Abstract1 {
+	abstract void m1();
+
+	public Abstract1() {
+		System.out.println("Abstract1 Constructor");
+	}
+
+	void m2() {
+		System.out.println("Abstract1 M2");
+	}
+}
+
+class ImplementationClass extends Abstract1 {
+
+	@Override
+	void m1() {
+		System.out.println("Abstract Implement M1");
+	}
+
+	void m3() {
+		System.out.println("ImplementationClass M3");
+	}
+
+}
+
+public class AbstractClass {
+
+	public static void main(String[] args) {
+
+		Abstract1 a1 = new ImplementationClass();
+		a1.m1();
+		a1.m2();
+
+		System.out.println("******************8");
+		Abstract1 a2 = new ImplementationClass();
+		a2.m1();
+		a2.m2();
+
+	}
+
+}
+
+OUTPUT:
+Abstract1 Constructor
+Abstract Implement M1
+Abstract1 M2
+******************8
+Abstract1 Constructor
+Abstract Implement M1
+Abstract1 M2
+
+->One abstract class can provide body for abstract method of another abstarct class, if that done then no need of imp class to provide body again.
+
+Ex:Abstract2 class providing body to Abstract1 class method.
+
+package oops2;
+
+abstract class Abstract1 {
+	abstract void m1();
+
+	public Abstract1() {
+		System.out.println("Abstract1 Constructor");
+	}
+
+	void m2() {
+		System.out.println("Abstract1 M2");
+	}
+}
+
+abstract class Abstract2 extends Abstract1 {
+	@Override
+	void m1() {
+		System.out.println("Abstract Implement M1");
+	}
+}
+
+class ImplementationClass extends Abstract2 {
+	void m3() {
+		System.out.println("ImplementationClass M3");
+	}
+
+}
+
+public class AbstractClass {
+
+	public static void main(String[] args) {
+
+		Abstract1 a1 = new ImplementationClass();
+		a1.m1();
+		a1.m2();
+
+		System.out.println("******************8");
+		Abstract1 a2 = new ImplementationClass();
+		a2.m1();
+		a2.m2();
+
+	}
+
+}
+
+OUTPUT:
+Abstract1 Constructor
+Abstract Implement M1
+Abstract1 M2
+******************8
+Abstract1 Constructor
+Abstract Implement M1
+Abstract1 M2
+
+
+

@@ -37,6 +37,8 @@ Class/Abstract Class/Interface
 34.WRAPPER CLASS
 35.PACKAGES
 36.ARRAYS
+37.STRINGS
+38.LABMDA EXPRESSION
 
 
 
@@ -3273,3 +3275,136 @@ String s1="appu"
 String s2="appu"
 s1.compareTo(s2) //0 Since both are equal
 
+concat()
+--------
+Ex:
+public class StringDemo1 {
+
+	public static void main(String[] args) {
+
+		String str1 = "Appu";
+		System.out.println(str1);
+		System.out.println("********************");
+
+		str1.concat("Rajkumar");
+		System.out.println(str1);
+		System.out.println("********************");
+
+		String str2 = str1.concat("rajkuamr");
+		System.out.println(str1);
+		System.out.println(str2);
+		System.out.println("********************");
+
+		String s1 = "Raghu";
+		s1 = s1.concat("Rajkumar");
+		System.out.println(s1);
+		System.out.println("********************");
+
+	}
+
+}
+
+OUTPUT:
+Appu
+********************
+Appu
+********************
+Appu
+Appurajkuamr
+********************
+RaghuRajkumar
+********************
+
+Concatenation operator +
+------------------------
+String str="Appu"+"Rajkuamr"
+
+Other methods
+-------------
+public class StringDemo1 {
+
+	public static void main(String[] args) {
+                String str1 = " Appu Rajkumar ";
+		System.out.println(str1.charAt(2));
+		System.out.println(str1.substring(3));
+		System.out.println(str1.stripLeading());
+		System.out.println(str1.stripTrailing());
+		System.out.println(str1.split(" "));
+		System.out.println(str1.indexOf("p"));
+                System.out.println(str1.length());
+
+	}
+
+}
+
+
+OUTPUT:
+p
+pu Rajkumar 
+Appu Rajkumar 
+ Appu Rajkumar
+[Ljava.lang.String;@71dac704
+2
+15
+
+STRING BUFFER
+-------------
+->Mutable string, allow modification on its content
+
+Ex:
+public class StringBufferDemo {
+
+	public static void main(String[] args) {
+		
+		StringBuffer sb=new StringBuffer("Appu");
+		System.out.println(sb);
+		sb.append("Rajkuamr");
+		System.out.println(sb);
+
+	}
+
+}
+
+OUTPUT:
+Appu
+AppuRajkuamr
+
+->
+StringBuffer sb1=new StringBuffer("Appu Rajkumar");
+StringBuffer sb2=new StringBuffer("Appu Rajkumar");
+System.out.println(sb1.equals(sb2)); //false
+
+Used to do ref value comparision not content comparision
+
+->final keyword will not affect mutability feature of string buffer
+
+public class StringBufferDemo {
+
+	public static void main(String[] args) {
+
+		final StringBuffer sb1 = new StringBuffer("Appu");
+		System.out.println(sb1);
+		sb1.append("Rajkuamr");
+		System.out.println(sb1);
+
+	}
+
+}
+
+OUTPUT:
+Appu
+AppuRajkuamr
+
+StringBuffer VS StringBuilder
+------------------------------
+StringBuffer:Not supports multithreading[Synchronized methods]
+StringBuilder:Supports multithreading
+
+************************************************************************************************************************************************************
+LABMDA EXPRESSION
+=================
+
+->Interface Types
+ Normal:Any int which is not SAM or Marker
+ SAM:Interface with single abstract method
+ Marker:Interface with zero method 

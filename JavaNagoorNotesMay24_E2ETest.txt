@@ -36,6 +36,7 @@ Class/Abstract Class/Interface
 33.ABSTRACT CLASS
 34.WRAPPER CLASS
 35.PACKAGES
+36.ARRAYS
 
 
 
@@ -2579,3 +2580,605 @@ packagename.membername
 Ex:java.util.ArrayList list=new java.util.ArrayList(); //No need to import the java.util package 
 
 ************************************************************************************************************************************************************
+INTERFACES
+==========
+->All methods are by default public abstract
+->Contains only Abstract methods
+->All varibales are by default are public static final, can be access using Interface name, Class name, Reference variable
+->Implementation class should implement interface and provide method to all the body else that class should be abstract
+->Overriding method acess specifier should be public
+->One class can implements any number of interfaces, no dimension problem
+->Object cannot be created
+->One interface can extend another interface but cannot implements another interface
+->One class can extend one class and implements 0 to N interfaces.
+->Without using implement keyword also we can implement the interface
+
+
+Ex:
+interface Calculator {
+	void add();
+
+}
+
+class Casio implements Calculator {
+
+	@Override
+	public void add() {
+		int a = 10, b = 20;
+		int c = a + b;
+		System.out.println(c);
+	}
+
+}
+
+class Ajantha implements Calculator {
+
+	@Override
+	public void add() {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Enter a and b value");
+		int a = sc.nextInt();
+		int b = sc.nextInt();
+		int c = a + b;
+		System.out.println(c);
+	}
+
+}
+
+public class InterfaceDemo3 {
+
+	public static void main(String[] args) {
+
+		Calculator c1 = new Casio();
+		c1.add();
+
+		Calculator c2 = new Ajantha();
+		c2.add();
+
+	}
+
+}
+
+Java 8
+->Interface can have one method with body that is default method.
+->Implementing class is not mandatory to provide implementation for default method, if needed it can be overridden
+
+Ex:Default method in Interface
+interface Calculator1 {
+	void add();
+
+	default void display() {
+		System.out.println("Default method");
+	}
+
+}
+
+class Casio1 implements Calculator1 {
+
+	@Override
+	public void add() {
+		int a = 10, b = 20;
+		int c = a + b;
+		System.out.println(c);
+	}
+
+}
+
+public class InterfaceDemo4 {
+
+	public static void main(String[] args) {
+
+		Calculator1 c = new Casio1();
+		c.display();
+
+	}
+
+}
+
+Ex: Overridning default method
+interface Calculator1 {
+	void add();
+
+	default void display() {
+		System.out.println("Default method");
+	}
+
+}
+
+class Casio1 implements Calculator1 {
+
+	@Override
+	public void add() {
+		int a = 10, b = 20;
+		int c = a + b;
+		System.out.println(c);
+	}
+
+	@Override
+	public void display() {
+		System.out.println("Default method of child class");
+	}
+
+}
+
+public class InterfaceDemo4 {
+
+	public static void main(String[] args) {
+
+		Calculator1 c = new Casio1();
+		c.display();
+
+	}
+
+}
+
+Java 8
+->Interface can have static method with body and cannot be overrided in imp class
+
+Ex:Static method with body in interface
+
+interface Calculator1 {
+	void add();
+
+	default void display() {
+		System.out.println("Default method");
+	}
+	
+	static void staticMethod()
+	{
+		System.out.println("Static method in Interface");
+	}
+
+}
+
+class Casio1 implements Calculator1 {
+
+	@Override
+	public void add() {
+		int a = 10, b = 20;
+		int c = a + b;
+		System.out.println(c);
+	}
+
+	@Override
+	public void display() {
+		System.out.println("Default method of child class");
+	}
+	
+
+}
+
+public class InterfaceDemo4 {
+
+	public static void main(String[] args) {
+
+		Calculator1 c = new Casio1();
+		c.display();
+		
+		Calculator1.staticMethod();
+
+	}
+
+}
+
+
+Java 8
+Implementing Interface
+----------------------
+
+Inner class
+-----------
+ Memebr Inner class
+ Static Inner class
+ Anonymous Inner class
+
+Ex:Memebr Inner class
+class A {
+	int a = 10;
+
+	void show() {
+		System.out.println("In A Show");
+	}
+
+	class B {
+		void show() {
+			System.out.println("In B Show");
+		}
+	}
+}
+
+public class InnerClassDemo {
+
+	public static void main(String[] args) {
+
+		A a = new A();
+		a.show();
+
+		A.B b = a.new B();
+		b.show();
+	}
+
+}
+
+Ex:Static Inner class
+
+class C {
+	void show() {
+		System.out.println("C class show");
+	}
+
+	static class D {
+		void show() {
+			System.out.println("D class show");
+		}
+	}
+}
+
+public class StaticInnerClass {
+
+	public static void main(String[] args) {
+		C.D c = new C.D();
+		c.show();
+
+	}
+
+}
+
+
+Anonymous Inner class
+---------------------
+->Class with no name
+->Any number of anonuous inner class can be created 
+->Used to override normal method, provide imp for Interface and Abstract class
+
+Syntax:
+className/interfaceName/abstractclassName refVar=new className()/interfaceName()/abstractclassName(){override method};
+refVar.overridedMethod();
+
+Ex 1:Anonymous inner class for overriding class method
+class Car {
+	void driving() {
+		System.out.println("Driving");
+	}
+}
+
+public class AnonymousInnerClass1 {
+
+	public static void main(String[] args) {
+
+		Car c = new Car() {
+
+			@Override
+			void driving() {
+				System.out.println("NFS Driving");
+			}
+		};
+
+		c.driving();
+
+	}
+
+}
+
+Ex 2:Any number of Inner class can be created
+class Car {
+	void driving() {
+		System.out.println("Driving");
+	}
+}
+
+public class AnonymousInnerClass1 {
+
+	public static void main(String[] args) {
+
+		Car c = new Car() {
+
+			@Override
+			void driving() {
+				System.out.println("NFS Driving");
+			}
+		};
+
+		c.driving();
+		
+		Car d = new Car() {
+
+			@Override
+			void driving() {
+				System.out.println("Sanaddress car Driving");
+			}
+		};
+		d.driving();
+
+	}
+
+}
+
+Ex 3:Anonymous IC for Interface implementtion
+
+interface I {
+	void add();
+}
+
+public class AnonymousInnerclassForInterface {
+
+	public static void main(String[] args) {
+
+		I i1 = new I() {
+
+			@Override
+			public void add() {
+				int a = 10, b = 20;
+				System.out.println(a + b);
+
+			}
+
+		};
+		
+		i1.add();
+
+	}
+
+}
+
+Ex 4:Anonymous IC for Abstract class Implementation
+abstract class Abstract {
+	abstract void add();
+
+	public Abstract() {
+		System.out.println("Abstract Constructor");
+	}
+}
+
+public class AnonymousInnerclassForAbstractClass {
+
+	public static void main(String[] args) {
+
+		Abstract a = new Abstract() {
+
+			@Override
+			void add() {
+				int a = 10, b = 20;
+				System.out.println(a + b);
+
+			}
+		};
+
+		a.add();
+
+	}
+
+}
+
+OUTPUT:
+Abstract Constructor
+30
+
+Converting Abbstract class to lambda exp
+
+Ex:Lambda Exp/Converting Abbstract class to lambda exp
+
+interface P {
+	void display();
+}
+
+public class AbstractClassToLambdaExp1 {
+
+	public static void main(String[] args) {
+
+		P p = () ->System.out.println("Lambda");
+
+		p.display();
+
+	}
+
+}
+
+************************************************************************************************************************************************************
+IS A-Abstract class
+Behaviour-Interface
+************************************************************************************************************************************************************
+ARRAYS
+======
+->Object used to store group of homogeneous data in heap area.
+->Index based DS
+
+Declaration of Array:
+int a[]=new int[4];
+int a[]={1,2,3};
+int a[]=new int[]{1,2,3};
+
+Ex: 1 D Array
+public class SingleDimArrayDemo {
+
+	public static void main(String[] args) {
+		int a[] = new int[5];
+		a[0] = 10;
+		a[1] = 20;
+		a[2] = 30;
+		// a[3] = 40;
+		a[4] = 50;
+
+		for (int i : a) {
+			System.out.print(i + " ");
+		}
+
+		System.out.println();
+
+		int b[] = { 1, 2, 3, 4, 5 };
+
+		for (int i : b) {
+			System.out.print(i + " ");
+		}
+	}
+
+}
+
+OUTPUT:
+10 20 30 0 50 
+1 2 3 4 5 
+
+Ex:To store Object type data
+class Student {
+	public void display() {
+		System.out.println("Display method");
+	}
+}
+
+public class ArrayToStoreObjectTypeData {
+
+	public static void main(String[] args) {
+
+		Student s1 = new Student();
+		Student s2 = new Student();
+		Student s3 = new Student();
+
+		Student st[] = new Student[3];
+		st[0] = s1;
+		st[1] = s2;
+		st[2] = s3;
+
+		for (Student s : st) {
+			System.out.println(s);
+			s.display();
+
+		}
+
+	}
+
+}
+
+OUTPUT:
+telusko.Student@5d22bbb7
+Display method
+telusko.Student@123772c4
+Display method
+telusko.Student@2d363fb3
+Display method
+
+
+2D Array
+--------
+Ex:
+public class TwoDimArray {
+
+	public static void main(String[] args) {
+
+		int a[][] = new int[2][3];
+
+		a[0][0] = 10;
+		a[0][1] = 10;
+		a[0][2] = 10;
+
+		a[1][0] = 10;
+		a[1][1] = 10;
+		a[1][2] = 10;
+
+		for (int i = 0; i < a.length; i++) {
+			for (int j = 0; j < a[i].length; j++) {
+				System.out.print(a[i][j] + " ");
+			}
+			System.out.println();
+		}
+
+	}
+
+}
+
+OUTPUT:
+10 10 10 
+10 10 10 
+
+Ex:Jagged Array
+
+
+public class JaggedArrayDemo {
+
+	public static void main(String[] args) {
+
+		int a[][] = new int[3][];
+		a[0] = new int[2];
+		a[1] = new int[3];
+		a[2] = new int[4];
+
+		a[0][0] = 10;
+		a[0][1] = 20;
+
+		a[1][0] = 30;
+		a[1][1] = 40;
+		a[1][2] = 50;
+
+		a[2][0] = 30;
+		a[2][1] = 40;
+		a[2][2] = 50;
+		a[2][3] = 50;
+
+		for (int[] i : a) {
+			for (int j : i) {
+				System.out.print(j + " ");
+			}
+			System.out.println();
+		}
+
+	}
+
+}
+
+OUTPUT:
+10 20 
+30 40 50 
+30 40 50 50 
+
+Ex:EMployee Array
+class Employee {
+	String name;
+	int age;
+
+	void display() {
+		System.out.println(name + " age is:" + age);
+	}
+}
+
+public class StudentArrayDemo {
+
+	public static void main(String[] args) {
+
+		Employee e[] = new Employee[3];
+		e[0] = new Employee();
+		e[1] = new Employee();
+		e[2] = new Employee();
+
+		e[0].age = 10;
+		e[0].name = "Appu";
+		e[0].display();
+
+		e[1].age = 20;
+		e[1].name = "Shivu";
+		e[1].display();
+
+		e[2].age = 30;
+		e[2].name = "Raghu";
+		e[2].display();
+
+	}
+
+}
+
+
+OUTPUT:
+Appu age is:10
+Shivu age is:20
+Raghu age is:30
+
+->Arrays class is used to perofrm operation on Arrays
+************************************************************************************************************************************************************
+STRINGS
+=======
+->Anything inside "" is considered as String object
+
+Types:
+ Mutable:Changable Ex:StringBuffer/StrinBuilder
+ Immutable:Non changable Ex:String
+
+

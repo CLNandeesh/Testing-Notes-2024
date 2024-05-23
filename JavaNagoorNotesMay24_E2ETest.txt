@@ -3176,9 +3176,100 @@ Raghu age is:30
 STRINGS
 =======
 ->Anything inside "" is considered as String object
+->Whever we create String object, one copy will be in SCP
+->If used new then create in heap else create in SCP
+->SCP not allow duplicate, Heap allow duplicate
+->Reference variable stored in stack memory
 
 Types:
- Mutable:Changable Ex:StringBuffer/StrinBuilder
- Immutable:Non changable Ex:String
+ Mutable:Changable Ex:StringBuffer/StrinBuilder/Data inside the memory can be updated
+ Immutable:Non changable Ex:String/Data inside the memory cannot be changed
 
+
+String
+------
+Heap:Duplicte allowed/Eligible for GC
+SCP:Inside Heap/No duplicates/Not eligible for GC
+
+Case 1:
+
+Ex1:
+String str1="Appu"; //Created in SCP
+String str1="Appu"; //Created in SCP
+both str1 and str2 refers to same object since already existed, no duplicates allowed.
+
+str1--->
+             Appu
+str2---> 
+
+str1==str2 //true both will be having same reference value,points to same object
+str1.equals(str2) //true
+
+Ex2:
+String str1="Appu1"; //Created in SCP
+String str1="Appu2"; //Created in SCP
+str1 and str2 refers to different objects
+
+str1--->     Appu1
+str2--->     Appu2
+
+str1==str2 //false both will refer different object, reference value will be different
+str1.equals(str2) //false
+
+Case 2:
+String str1=new String("Raghu"); //Created in SCP and Heap
+String str2=new String("Raghu"); //Created in SCP and Heap
+both str1 and str2 refers to different object, duplicates allowed.
+
+str1-->Raghu [Heap]
+str2-->Raghu [heap]
+
+str1--->
+         Raghu [SCP]
+str2--->
+
+str1==str2 //false, both refer to doff fobject and will be having diff ref value
+str1.equals(str2) //true
+
+Ex:
+
+public class StringDemo1 {
+
+	public static void main(String[] args) {
+
+		String str1 = "Appu";
+		String str2 = "Appu";
+
+		System.out.println(str1.equals(str2));
+		System.out.println(str1 == str2);
+
+		System.out.println("********************88");
+
+		String s1 = new String("Raghu");
+		String s2 = new String("Raghu");
+
+		System.out.println(s1.equals(s2));
+		System.out.println(s1 == s2);
+
+	}
+
+}
+
+
+OUTPUT:
+true
+true
+********************
+true
+false
+
+compareTo()
+----------
+->Dict order comparision
+->0:equal pos:str1>str2 neg:str2>str1
+->Ascii value comparision
+
+String s1="appu"
+String s2="appu"
+s1.compareTo(s2) //0 Since both are equal
 

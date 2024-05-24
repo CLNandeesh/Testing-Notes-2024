@@ -3626,7 +3626,8 @@ EXCEPTION HANDLING
 
 Error:Programming mistake by developer at compilation time/runtime which cant be handled through programming.[Syntax/Semantic..errors]
 
-Exception:
+Exception
+---------
 ->Abnormal condition that may leads to abnormal termination[abrupt] of the program, can be handled by programming.
 ->Occurs at runtime , can be identified at compilation time or at runtime.
         
@@ -3666,9 +3667,12 @@ Prog exe>Exception occurs>Control go to JVM>JVM checks user def exception handle
 Case 2:Exp occurs/User def exp handling
 Prog exe>Exception occurs>Control go to JVM>JVM checks user def exception handler>Control moves to default exp handler[catch block]>Execute code of catch block>Smooth termination of program[Lines below the exp causing statemet will be executed after catch block]
 
-Handling Exception:
+Handling Exception
+------------------
+
 ->Identify exp causing statement only
 ->Put in to try block
+->If exception occurs in catch block then it will go to default exp handler and leads to abnormal termination
 
 Ex:Program with exception handling can leads to smooth termination
 public class ProgramwithoutExceptionhandling {
@@ -3709,7 +3713,22 @@ STOP
 
 ->If exp occurs, lines below try block will not be executed.Only statement after catch block will be executed.
 
-Ex3:Exception while adding element to array
+
+Multiple Catch Block
+--------------------
+->One try can have 0[need finally] to N catch block
+->Always provide different catch block for different exception
+->At end provide one generic catch block
+->If there exist relation between the catch block exception then first must be child then parent.
+catch(parent)
+catch(child) //error
+
+catch(child)
+catch(parent) //works fine
+->Seperate try catch for seperate exception causing statements.
+
+
+Ex3:Exception while adding element to array with multiple catch block
 public class ExceptionWhileEnteringElementIntoArray {
 
 	public static void main(String[] args) {
@@ -3749,6 +3768,7 @@ Enter position
 Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 222 out of bounds for length 5
 	at exceptionhandlingtelusko.ExceptionWhileEnteringElementIntoArray.main(ExceptionWhileEnteringElementIntoArray.java:21)
 
+Solution:
 public class ExceptionWhileEnteringElementIntoArray {
 
 	public static void main(String[] args) {
@@ -3771,8 +3791,14 @@ public class ExceptionWhileEnteringElementIntoArray {
 			for (int i : a) {
 				System.out.print(i + " ");
 			}
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Index value is out of limit");
+			e.printStackTrace();
+		} catch (NegativeArraySizeException e) {
+			System.out.println("Index value is negative");
+			e.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("Please check the index position");
+			System.out.println("Generic exception");
 			e.printStackTrace();
 		}
 
@@ -3788,12 +3814,223 @@ START
 Enter Array size
 5
 Enter element
-55
+33
 Enter position
 5
-Please check the index position
+Index value is out of limit
 java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5
 	at exceptionhandlingtelusko.ExceptionWhileEnteringElementIntoArray.main(ExceptionWhileEnteringElementIntoArray.java:22)
 
 STOP
+
+Ex 4:Multiple catch block
+public class ExceptionWhileEnteringElementIntoArray {
+
+	public static void main(String[] args) {
+
+		System.out.println("START");
+
+		try {
+			Scanner sc = new Scanner(System.in);
+
+			System.out.println("Enter Array size");
+			int size = sc.nextInt();
+			int a[] = new int[size];
+
+			System.out.println("Enter element");
+			int ele = sc.nextInt();
+			System.out.println("Enter position");
+			int pos = sc.nextInt();
+
+			System.out.println("***DIVISION*****");
+			int res = ele / pos; // Exception causing statement
+			System.out.println("Result is:" + res);
+			System.out.println("***DIVISION*****");
+
+			System.out.println("***ARRAY*****");
+			a[pos] = ele; // Exception causing statement
+
+			for (int i : a) {
+				System.out.print(i + " ");
+			}
+			System.out.println("***ARRAY*****");
+
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Index value is out of limit");
+			e.printStackTrace();
+		} catch (NegativeArraySizeException e) {
+			System.out.println("Index value is negative");
+			e.printStackTrace();
+		} catch (ArithmeticException e) {
+			System.out.println("Denominator is 0");
+			e.printStackTrace();
+		}
+
+		catch (Exception e) {
+			System.out.println("Generic exception");
+			e.printStackTrace();
+		}
+
+		System.out.println();
+		System.out.println("STOP");
+
+	}
+
+}
+
+OUTPUT:
+START
+Enter Array size
+5
+Enter element
+100
+Enter position
+0
+***DIVISION*****
+Denominator is 0
+java.lang.ArithmeticException: / by zero
+	at exceptionhandlingtelusko.ExceptionWhileEnteringElementIntoArray.main(ExceptionWhileEnteringElementIntoArray.java:24)
+
+STOP
+
+Ex 5:Exception occuring in calling function/called function
+->Always try to handle exception in calling function[where exaclty exp occurs]
+->JVM search for present method, else go to calling method else go to def exp handler
+->In below prog, try to handle in alpha() since exp occurin at that method itself.
+
+->Not handled in both calling and called function-Abrupt termination in both Called and calling function
+->Here exp is not handled by both calling and called function so it will go to JVM def exp handler
+class Sample {
+	static void alpha(int a, int b) {
+		
+		System.out.println("ALPHA START");
+		int res = a / b;
+		System.out.println("Res is: " + res);
+		System.out.println("ALPHA END");
+	}
+}
+
+public class ExceptionOccursInCallingcalledFucntion {
+
+	public static void main(String[] args) {
+
+		System.out.println("MAIN START");
+		Sample.alpha(100, 0);
+		System.out.println("MAIN END");
+
+	}
+
+}
+
+OUTPUT:
+MAIN START
+ALPHA START
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at exceptionhandlingtelusko.Sample.alpha(ExceptionOccursInCallingcalledFucntion.java:9)
+	at exceptionhandlingtelusko.ExceptionOccursInCallingcalledFucntion.main(ExceptionOccursInCallingcalledFucntion.java:20)
+
+
+->Handled in Called function-Abrupt termination in Calling function
+class Sample {
+	static void alpha(int a, int b) {
+
+		System.out.println("ALPHA START");
+		int res = a / b;
+		System.out.println("Res is: " + res);
+		System.out.println("ALPHA END");
+	}
+}
+
+public class ExceptionOccursInCallingcalledFucntion {
+
+	public static void main(String[] args) {
+
+		System.out.println("MAIN START");
+		try {
+			Sample.alpha(100, 0);
+		} catch (Exception e) {
+			System.out.println("Invalid input");
+			e.printStackTrace();
+		}
+
+		System.out.println("MAIN END");
+
+	}
+
+}
+
+OUTPUT:
+MAIN START
+ALPHA START
+Invalid input
+java.lang.ArithmeticException: / by zero
+	at exceptionhandlingtelusko.Sample.alpha(ExceptionOccursInCallingcalledFucntion.java:9)
+	at exceptionhandlingtelusko.ExceptionOccursInCallingcalledFucntion.main(ExceptionOccursInCallingcalledFucntion.java:21)
+MAIN END
+
+
+->Handled in Calling function-Smooth termination
+class Sample {
+	static void alpha(int a, int b) {
+
+		System.out.println("ALPHA START");
+		try {
+			int res = a / b;
+			System.out.println("Res is: " + res);
+		} catch (Exception e) {
+			System.out.println("Invalid input");
+			e.printStackTrace();
+		}
+
+		System.out.println("ALPHA END");
+	}
+}
+
+public class ExceptionOccursInCallingcalledFucntion {
+
+	public static void main(String[] args) {
+
+		System.out.println("MAIN START");
+		Sample.alpha(100, 0);
+		System.out.println("MAIN END");
+
+	}
+
+}
+
+
+OUTPUT:
+MAIN START
+ALPHA START
+Invalid input
+java.lang.ArithmeticException: / by zero
+	at exceptionhandlingtelusko.Sample.alpha(ExceptionOccursInCallingcalledFucntion.java:10)
+	at exceptionhandlingtelusko.ExceptionOccursInCallingcalledFucntion.main(ExceptionOccursInCallingcalledFucntion.java:26)
+ALPHA END
+MAIN END
+
+Exception Object
+----------------
+->Exception object contains
+e.printStacktrace() //Name,Description,Location[Stacktrace,Calling and called method location]
+e.getMessage() //Description
+e.toString() //Name and Description
+
+Exception generation
+--------------------
+->Can handle using try catch
+->Ducking exception/throw the exception from calling to called function[throws]
+->Rethrowing exception[throw/throws/try catch finally]
+
+Exception Types
+---------------
+Checked
+ Identified by Compiler Ex:IntruptedException, Filenotfound Exception
+UnChecked 
+ Identified by JVM at runtime
+
+throws
+-------
+->Used to bypass the exception
+->Used to throw exception from called function to calling function or to JVM
 

@@ -4037,6 +4037,7 @@ throws
 throw
 -----
 ->Used to throw the exception
+->Below thorw keyword cant able to write any stattements
 
 Ex:Handling exception and throwing it to called method
 Alpha handles exception and also throw to main emthod to handle there also
@@ -4287,24 +4288,454 @@ OUTPUT:
 
 Exception Hierarchy
 -------------------
-Object->Error/Exception
+Object->Throwable->Error/Exception
 
 Error
  VirtualMachineError
-  OutOfMemoryError
-  StackOverflowError
+   OutOfMemoryError
+   StackOverflowError
  LinkageError
  AssertionError
 
 Exception
  RuntimeException
-  ArithemeticException
-  NullpointerException
-  ClassCastException
-  IndexOutOfBoundException
- IOException
-  EOFException
-  FileNotFoundException
- IntruptedException
- SQLException
+    ArithemeticException
+    NullpointerException
+    ClassCastException
+    IndexOutOfBoundException
+      ArrayIndexOutOfBoundException
+      StringIndexOutOfBoundException
+    IOException
+      EOFException
+      FileNotFoundException
+    IntruptedException
+    SQLException
+
+
+Custom Exception
+----------------
+->Any class which is extending Exception class is exception class
+
+class anyExceptionClass extends Exception
+{
+  public anyExceptionClass(String str)
+   {
+    supper(str);
+   }
+}
+
+throw new anyExceptionClass("Something went wrong");
+
+Ex:
+
+class SometinWentWrongException extends Exception {
+	public SometinWentWrongException(String str) {
+		super(str);
+	}
+}
+
+public class CustomExceptionDemo1 {
+
+	public static void main(String[] args)throws SometinWentWrongException {
+		
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter age");
+		int age=sc.nextInt();
+		
+		if(age<18)
+		{
+			throw new SometinWentWrongException("Age s less than 18 eror");
+		}
+		else
+		{
+			System.out.println("You are eligible to vote");
+		}
+	}
+
+}
+
+OUTPUT:
+Enter age
+11
+Exception in thread "main" exceptionhandlingtelusko.SometinWentWrongException: Age s less than 18 eror
+	at exceptionhandlingtelusko.CustomExceptionDemo1.main(CustomExceptionDemo1.java:21)
+
+
+Ex:
+
+class InvalidCredException extends Exception {
+	public InvalidCredException(String str) {
+		super(str);
+	}
+}
+
+class LoginPage {
+	String acctName = "Appu";
+	String password = "Appu123";
+	String an, pw;
+	Scanner sc = new Scanner(System.in);
+
+	public void getInput() {
+		System.out.println("Enter name");
+		an = sc.next();
+		System.out.println("Enter password");
+		pw = sc.next();
+	}
+
+	public void verify() throws InvalidCredException {
+		int i = 0;
+		if (an.equals(acctName) && pw.equals(password)) {
+			System.out.println("Successfull Login");
+		} else {
+			// i++;
+			// int remainingAttempt = 3 - i;
+			System.out.println("Login failed, Try again");
+			throw new InvalidCredException("Invalid Credentials");
+		}
+	}
+}
+
+class Bank {
+	public void doLogin() {
+		LoginPage lp = new LoginPage();
+		try {
+			lp.getInput();
+			lp.verify();
+		} catch (Exception e1) {
+			System.out.println("You have 2 more attempts");
+
+			try {
+				lp.getInput();
+				lp.verify();
+			} catch (Exception e2) {
+				System.out.println("You have last attempts");
+				try {
+					lp.getInput();
+					lp.verify();
+				} catch (Exception e3) {
+					System.out.println("You have exceed the limit");
+
+				}
+
+			}
+		}
+
+	}
+
+}
+
+public class BankAccountLoginValidation {
+
+	public static void main(String[] args) {
+
+		Bank b = new Bank();
+		b.doLogin();
+
+	}
+
+}
+
+One Cathc with Multiple Exception
+---------------------------------
+try
+{}
+catch(Exception1 | Exception2 e)
+{}
+
+There should be no hierarchy
+
+class Demo1 extends Exception {
+	public Demo1(String str) {
+		super(str);
+	}
+}
+
+class Demo2 extends Throwable {
+	public Demo2(String str) {
+		super(str);
+	}
+}
+
+public class OneCatchWithMultipleException {
+
+	static void Test() throws Demo1 {
+		int a = 10, b = 20;
+		if (a == b) {
+			throw new Demo1("A is Equal to B");
+		} else {
+			throw new Demo1("A is Not Equal to B");
+		}
+	}
+
+	public static void main(String[] args) throws Demo1, Demo2 {
+
+		try {
+			Test();
+		} catch (Demo1 | StringIndexOutOfBoundsException d) {
+			d.printStackTrace();
+		}
+
+	}
+
+}
+************************************************************************************************************************************************************
+MULTITHREADING
+==============
+->Whenevr we start running Java prog, JVM creates and assign one thread knows as main thread for the excution and its default priority is 5
+->Name and Priority of the thread can be changed
+
+Ex:
+public class MainThreadDemo1 {
+
+	public static void main(String[] args) {
+
+		Thread thread = new Thread();
+
+		String name1 = thread.getName();
+		int priority1 = thread.getPriority();
+		System.out.println("Name of the thread is: " + name1);
+		System.out.println("Priority of the Main thread is: " + priority1);
+
+		thread.setName("New Main Thread");
+		thread.setPriority(4);
+
+		String name2 = thread.getName();
+		int priority2 = thread.getPriority();
+		System.out.println("Name of the thread is: " + name2);
+		System.out.println("Priority of the Main thread is: " + priority2);
+
+	}
+
+}
+
+OUTPUT:
+Name of the thread is: Thread-0
+Priority of the Main thread is: 5
+Name of the thread is: New Main Thread
+Priority of the Main thread is: 4
+
+Creating Thread
+---------------
+ Extending Thread class
+ Implementing Runnable interface
+
+Runnable Interface
+  run()
+Thread class implemented run()
+
+Method 1 Steps:
+Create a class and implements Runnable interface
+Add method with name run
+
+In Main method
+ Create Object for the class
+ Create Thread object for Thread class and pass class reference of previous step in it
+ Call start method using the thread object reference[Internally Thread scheduler will call run()]
+
+Note:
+->Thread execute only run() logic
+->Thread scheduler is one who control all thread execution
+
+Ex:3 Thread creation for 3 class to perform 3 different activity paralelly
+class Banking implements Runnable {
+
+	@Override
+	public void run() {
+
+		System.out.println("BANKING ACTIVITY STARTED");
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter name");
+		String name = sc.next();
+		System.out.println("Enter password");
+		String password = sc.next();
+
+		System.out.println("Name is: " + name);
+		System.out.println("password is: " + password);
+		System.out.println("BANKING ACTIVITY ENDED");
+
+	}
+
+}
+
+class Gaming implements Runnable {
+
+	@Override
+	public void run() {
+
+		System.out.println("GAMING ACTIVITY STARTED");
+		System.out.println("Need for speed game");
+		for (int i = 0; i < 10; i++) {
+			System.out.println("Car driving in speed " + i + " KM");
+		}
+		System.out.println("GAMING ACTIVITY ENDED");
+
+	}
+}
+
+class Loop implements Runnable {
+
+	@Override
+	public void run() {
+		System.out.println("LOOP ACTIVITY STARTED");
+		for (int i = 0; i < 5; i++) {
+			System.out.println("APPU is BOSS");
+		}
+		System.out.println("LOOP ACTIVITY ENDED");
+
+	}
+
+}
+
+public class MultithreadingDemo1 {
+
+	public static void main(String[] args) {
+
+		Banking b = new Banking();
+		Gaming g = new Gaming();
+		Loop l = new Loop();
+
+		Thread t1 = new Thread(b);
+		Thread t2 = new Thread(g);
+		Thread t3 = new Thread(l);
+
+		t1.start();
+		t2.start();
+		t3.start();
+
+	}
+
+}
+
+OUTPUT:
+BANKING ACTIVITY STARTED
+GAMING ACTIVITY STARTED
+LOOP ACTIVITY STARTED
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+LOOP ACTIVITY ENDED
+Need for speed game
+Car driving in speed 0 KM
+Car driving in speed 1 KM
+Car driving in speed 2 KM
+Car driving in speed 3 KM
+Car driving in speed 4 KM
+Car driving in speed 5 KM
+Car driving in speed 6 KM
+Car driving in speed 7 KM
+Car driving in speed 8 KM
+Car driving in speed 9 KM
+GAMING ACTIVITY ENDED
+Enter name
+appu
+Enter password
+appu123
+Name is: appu
+password is: appu123
+BANKING ACTIVITY ENDED
+
+Method 2 Steps:
+Create a class and extends Thread class
+Add method with name run
+
+In Main method
+ Create Object for the class
+ With object reference Call start method[Internally Thread scheduler will call run()]
+
+Ex:
+class Banking1 extends Thread {
+
+	@Override
+	public void run() {
+
+		System.out.println("BANKING ACTIVITY STARTED");
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter name");
+		String name = sc.next();
+		System.out.println("Enter password");
+		String password = sc.next();
+
+		System.out.println("Name is: " + name);
+		System.out.println("password is: " + password);
+		System.out.println("BANKING ACTIVITY ENDED");
+
+	}
+
+}
+
+class Gaming1 extends Thread {
+
+	@Override
+	public void run() {
+
+		System.out.println("GAMING ACTIVITY STARTED");
+		System.out.println("Need for speed game");
+		for (int i = 0; i < 10; i++) {
+			System.out.println("Car driving in speed " + i + " KM");
+		}
+		System.out.println("GAMING ACTIVITY ENDED");
+
+	}
+}
+
+class Loop1 extends Thread {
+
+	@Override
+	public void run() {
+		System.out.println("LOOP ACTIVITY STARTED");
+		for (int i = 0; i < 5; i++) {
+			System.out.println("APPU is BOSS");
+		}
+		System.out.println("LOOP ACTIVITY ENDED");
+
+	}
+
+}
+
+public class CraetingThreadByExtendingThreadClass {
+
+	public static void main(String[] args) {
+		Banking1 b = new Banking1();
+		Gaming1 g = new Gaming1();
+		Loop1 l = new Loop1();
+
+		b.start();
+		g.start();
+		l.start();
+	}
+
+}
+
+OUTPUT:
+GAMING ACTIVITY STARTED
+LOOP ACTIVITY STARTED
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+LOOP ACTIVITY ENDED
+BANKING ACTIVITY STARTED
+Need for speed game
+Car driving in speed 0 KM
+Car driving in speed 1 KM
+Car driving in speed 2 KM
+Car driving in speed 3 KM
+Car driving in speed 4 KM
+Car driving in speed 5 KM
+Car driving in speed 6 KM
+Car driving in speed 7 KM
+Car driving in speed 8 KM
+Car driving in speed 9 KM
+GAMING ACTIVITY ENDED
+Enter name
+appu
+Enter password
+appu123
+Name is: appu
+password is: appu123
+BANKING ACTIVITY ENDED
+
 

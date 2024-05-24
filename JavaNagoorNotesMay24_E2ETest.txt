@@ -4019,7 +4019,7 @@ e.toString() //Name and Description
 Exception generation
 --------------------
 ->Can handle using try catch
-->Ducking exception/throw the exception from calling to called function[throws]
+->Ducking[By Pass] exception/throw the exception from calling to called function[throws]
 ->Rethrowing exception[throw/throws/try catch finally]
 
 Exception Types
@@ -4033,4 +4033,278 @@ throws
 -------
 ->Used to bypass the exception
 ->Used to throw exception from called function to calling function or to JVM
+
+throw
+-----
+->Used to throw the exception
+
+Ex:Handling exception and throwing it to called method
+Alpha handles exception and also throw to main emthod to handle there also
+
+->Only handle and but not thow
+class HandleAndThrow {
+	
+	static void alpha(int a, int b) {
+
+		System.out.println("ALPHA START");
+		try {
+			int res = a / b;
+			System.out.println("Res is: " + res);
+		} catch (Exception e) {
+			System.out.println("Invalid input");
+			e.printStackTrace();
+		}
+
+		System.out.println("ALPHA END");
+	}
+}
+
+public class HandleAndThrowExceptionDemo {
+
+	public static void main(String[] args) {
+
+		System.out.println("MAIN START");
+		Sample.alpha(100, 0);
+		System.out.println("MAIN END");
+
+	}
+
+}
+
+OUTPUT:
+MAIN START
+ALPHA START
+Invalid input
+java.lang.ArithmeticException: / by zero
+	at exceptionhandlingtelusko.Sample.alpha(ExceptionOccursInCallingcalledFucntion.java:10)
+	at exceptionhandlingtelusko.HandleAndThrowExceptionDemo.main(HandleAndThrowExceptionDemo.java:25)
+ALPHA END
+MAIN END
+
+
+->Handle in Alpha method, Throw to Main method, Handle in main method
+class HandleAndThrow {
+
+	static void alpha(int a, int b) throws Exception {
+
+		System.out.println("ALPHA START");
+		try {
+			int res = a / b;
+			System.out.println("Res is: " + res);
+		} catch (Exception e) {
+
+			System.out.println("Invalid input");
+			System.out.println("Handle in Alpha method and throw to main method");
+			throw e;
+
+		}
+
+		System.out.println("ALPHA END");
+	}
+}
+
+public class HandleAndThrowExceptionDemo {
+
+	public static void main(String[] args) {
+
+		System.out.println("MAIN START");
+		try {
+			HandleAndThrow.alpha(100, 0);
+		} catch (Exception e) {
+			System.out.println("Handle in Main method also");
+		}
+		System.out.println("MAIN END");
+
+	}
+
+}
+
+OUTPUT:
+MAIN START
+ALPHA START
+Invalid input
+Handle in Alpha method and throw to main method
+Handle in Main method also
+MAIN END
+
+Note:ALPHA END is not exe since control move from alpha to finally so add that statement in finally block
+
+finally
+-------
+->If any stm has to be exe whether exc occur or not then add those statement in finally block
+->exp occur or not /catch handles or not/even in catch exp occur or not-finally block will be executed[without finally execution control not terminates
+->To clean up code
+->Once we add finally, without executing finally control will never terminate
+->System.exit(0) dominates finally block
+
+try catch finally // allowed
+try finally // allowed
+try finally catch //not allowed
+
+try
+{
+s1
+s2 //Exception causing stm
+s3
+s4
+}
+
+catch
+{
+s5
+s6
+}
+
+Exception:
+s1 s2 s5 s6 but s3 and s4 not exe, so if we need to exe those stm even if exp occurs then add it to finally block
+
+try
+{
+s1
+s2 //Exception causing stm
+}
+
+catch
+{
+s5
+s6
+}
+
+finally
+{
+s3
+s4
+}
+
+Ex:
+public class FinallyDemo {
+
+	public static void main(String[] args) {
+
+		try {
+			System.out.println("Statement 1");
+			System.out.println("Statement 2");
+			throw new ArithmeticException();
+
+		}
+
+		catch (Exception e) {
+			System.out.println("Catch block code");
+		} finally {
+			System.out.println("Statement 4");
+			System.out.println("Statement 5");
+		}
+
+	}
+
+}
+
+OUTPUT:
+Statement 1
+Statement 2
+Catch block code
+Statement 4
+Statement 5
+
+
+Ex:
+
+class HandleAndThrow {
+
+	static void alpha(int a, int b) throws Exception {
+
+		System.out.println("ALPHA START");
+		try {
+			int res = a / b;
+			System.out.println("Res is: " + res);
+		} catch (Exception e) {
+
+			System.out.println("Invalid input");
+			System.out.println("Handle in Alpha method and throw to main method");
+			throw e;
+
+		}
+
+		finally {
+			System.out.println("ALPHA END");
+		}
+
+	}
+}
+
+public class HandleAndThrowExceptionDemo {
+
+	public static void main(String[] args) {
+
+		System.out.println("MAIN START");
+		try {
+			HandleAndThrow.alpha(100, 0);
+		} catch (Exception e) {
+			System.out.println("Handle in Main method also");
+		}
+		System.out.println("MAIN END");
+
+	}
+
+}
+
+
+OUTPUT:
+MAIN START
+ALPHA START
+Invalid input
+Handle in Alpha method and throw to main method
+ALPHA END
+Handle in Main method also
+MAIN END
+
+->finally vs return
+fnally will be dominated than return, even there is return statement finally will be executed
+
+Ex:
+class Temp {
+	static int add(int a, int b) {
+		try {
+			return a + b;
+		} finally {
+			return 100;
+		}
+
+	}
+}
+
+public class FinallyVSReturn {
+
+	public static void main(String[] args) {
+		
+		System.out.println(Temp.add(10, 10));
+	}
+
+}
+
+OUTPUT:
+100
+
+Exception Hierarchy
+-------------------
+Object->Error/Exception
+
+Error
+ VirtualMachineError
+  OutOfMemoryError
+  StackOverflowError
+ LinkageError
+ AssertionError
+
+Exception
+ RuntimeException
+  ArithemeticException
+  NullpointerException
+  ClassCastException
+  IndexOutOfBoundException
+ IOException
+  EOFException
+  FileNotFoundException
+ IntruptedException
+ SQLException
 

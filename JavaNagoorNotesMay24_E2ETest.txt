@@ -39,8 +39,7 @@ Class/Abstract Class/Interface
 36.ARRAYS
 37.STRINGS
 38.LABMDA EXPRESSION
-
-
+39.EXCEPTION HANDLING
 
 ************************************************************************************************************************************************************
 Day 1,2,3
@@ -3405,6 +3404,265 @@ LABMDA EXPRESSION
 =================
 
 ->Interface Types
- Normal:Any int which is not SAM or Marker
- SAM:Interface with single abstract method
- Marker:Interface with zero method 
+ Normal:Interface with more than one abstract methods
+ SAM[Functional Interface]:Interface with single abstract method
+ Marker:Interface with zero method
+->Reduce n of lines, not create seperate class files
+->Lambda exp works only for SAM/Functional interafce
+
+
+
+
+Ex 1:Anonymous IC to Lambda for Interface
+
+interface Bike {
+	void ride();
+}
+
+public class LambdaExpression1 {
+
+	public static void main(String[] args) {
+
+		Bike obj = new Bike() {
+			@Override
+			public void ride() {
+				System.out.println("riding");
+			}
+		};
+		obj.ride();
+
+	}
+
+}
+
+interface Bike {
+	void ride();
+}
+
+public class LambdaExpression1 {
+
+	public static void main(String[] args) {
+		Bike obj = () -> System.out.println("riding");
+
+		obj.ride();
+
+	}
+
+}
+
+Ex 2:
+interface I1 {
+	void add(int a, int b);
+}
+
+public class LambdaExp2 {
+
+	public static void main(String[] args) {
+
+		I1 i = new I1() {
+			@Override
+			public void add(int a, int b) {
+				System.out.println(a + b);
+			}
+		};
+
+		i.add(10, 20);
+
+	}
+
+}
+
+interface I1 {
+	void add(int a, int b);
+}
+
+public class LambdaExp2 {
+
+	public static void main(String[] args) {
+
+		I1 i = (a, b) -> System.out.println(a + b);
+		i.add(10, 20);
+
+	}
+
+}
+
+
+Ex 3:
+interface Lambda {
+	float add(int a, float b);
+}
+
+public class LambdaExp3 {
+
+	public static void main(String[] args) {
+
+		Lambda l = new Lambda() {
+			@Override
+			public float add(int a, float b) {
+				float c = 0;
+				c = a + b;
+				return c;
+			}
+		};
+
+		float res=l.add(10, 20.44f);
+		System.out.println(res);
+
+	}
+
+}
+
+interface Lambda {
+	float add(int a, float b);
+}
+
+public class LambdaExp3 {
+
+	public static void main(String[] args) {
+		Lambda l = (a, b) -> {
+			float c = 0;
+			c = a + b;
+			return c;
+
+		};
+
+		float res = l.add(10, 20.44f);
+		System.out.println(res);
+
+	}
+
+}
+
+Ex 4:
+interface Lambda4 {
+	int add(int a);
+}
+
+public class LambdaExp4 {
+
+	public static void main(String[] args) {
+
+		Lambda4 l = new Lambda4() {
+
+			@Override
+			public int add(int a) {
+				return a * a;
+			}
+		};
+		System.out.println(l.add(20));
+	}
+
+}
+
+interface Lambda4 {
+	int add(int a);
+}
+
+public class LambdaExp4 {
+
+	public static void main(String[] args) {
+		Lambda4 l = a -> a * a;
+		System.out.println(l.add(20));
+	}
+
+}
+
+Ex 5:
+->RHS part of lambda exp is just an object which looks like function, it can be passed as an argument.
+
+Ex:
+interface Lambda4 {
+	int add(int a);
+
+	public static void lambdaAsparameter(Lambda4 l) {
+
+	}
+}
+
+public class LambdaExp4 {
+
+	public static void main(String[] args) {
+		Lambda4 l = a -> a * a;
+		System.out.println(l.add(20));
+
+		Lambda4.lambdaAsparameter(l);
+		Lambda4.lambdaAsparameter(a -> a * a);
+	}
+
+}
+************************************************************************************************************************************************************
+Default Method in Interface
+---------------------------
+->Method with keyword defualt and with body inside the interface
+->Can be overrided[optional]
+
+FOREACH Method for COllection
+-----------------------------
+Ex:
+
+public class ForEachForCollection {
+
+	public static void main(String[] args) {
+
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.add(10);
+		list.add(20);
+		list.add(30);
+
+		list.forEach(n -> System.out.println(n));
+		list.forEach(n -> System.out.println(n * n));
+
+	}
+
+}
+
+************************************************************************************************************************************************************
+EXCEPTION HANDLING
+==================
+
+.java->Compiler->.class->JVM->RAM[JRE]CPU->Output
+  Comilation Phase              Execution phase
+
+Error:Programming mistake by developer at compilation time/runtime which cant be handled through programming.[Syntax/Semantic..errors]
+
+Exception:
+->Abnormal condition that may leads to abnormal termination[abrupt] of the program, can be handled by programming.
+->Occurs at runtime , can be identified at compilation time or at runtime.
+        
+Ex:Facebook not responding
+
+Ex 1:Program without exception handling can leads to abrubt termination
+public class ProgramwithoutExceptionhandling {
+
+	public static void main(String[] args) {
+
+		System.out.println("START");
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter numerator");
+		int a = sc.nextInt();
+		System.out.println("Enter denominator");
+		int b = sc.nextInt();
+		int res = a / b; //Exception causing statement
+		System.out.println("Result is: " + res);
+		System.out.println("STOP");
+
+	}
+
+}
+
+OUTPUT:
+START
+Enter numerator
+100
+Enter denominator
+0
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at exceptionhandlingtelusko.ProgramwithoutExceptionhandling.main(ProgramwithoutExceptionhandling.java:15)
+
+Case 1:Exp occurs/No User def exp handling
+Prog exe>Exception occurs>Control go to JVM>JVM checks user def exception>If not, control goes to default exp handler present in JVM>Print details of exception[name/description/exp causing statment location]>Abnormal termination of program[Lines below the exp causing statemet will not be executed]
+
+Case 2:Exp occurs/User def exp handling
+Prog exe>Exception occurs>Control go to JVM>JVM checks user def exception>Control moves to default exp handler[catch block]>Execute code of catch block>Smooth termination of program[Lines below the exp causing statemet will be executed]
+ 

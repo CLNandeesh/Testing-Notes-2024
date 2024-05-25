@@ -40,6 +40,7 @@ Class/Abstract Class/Interface
 37.STRINGS
 38.LABMDA EXPRESSION
 39.EXCEPTION HANDLING
+40.COLLECTIONS
 
 ************************************************************************************************************************************************************
 Day 1,2,3
@@ -4987,8 +4988,7 @@ Main ENDED
 
 Making one thread to exe and complete the run() -synchronized()
 ---------------------------------------------------------------
-
-->If we make method as synchronized then that method can be used by one thread at a time, until that thread finish executing themethod other thread will be in waiting state
+->If we make method as synchronized then that method can be used by one thread at a time, until that thread finish executing the method other thread will be in waiting state
 ->If any method is synchronized, then once any thread start executing run() then all other thread should wait untill it finish the execution.
 ->Can be applied to method and block
 
@@ -5126,4 +5126,42 @@ Child 2 parking the car
 Child 2 came out of the car
 Child 3 parking the car
 Child 3 came out of the car
+
+Thread State
+------------
+->In running state at any point of time there will be one thread
+->Thread cant be intrupted while its in running state
+new>ready[runnable]>running>dead
+waiting/blocked/sleep
+
+************************************************************************************************************************************************************
+PACKAGES
+========
+->If any class present in other package then we need to import before use
+************************************************************************************************************************************************************
+COLLECTIONS
+===========
+ArrayList
+---------
+->Follow dynamic array ds
+->Index based
+->Takes more time for insertion and deletion sinch shifting happens, solution is go wit linked list
+Ex:
+public class Collection1 {
+
+	public static void main(String[] args) {
+
+		List list = new ArrayList();
+		list.add("Appu");
+		list.add(10);
+		list.add(12.33f);
+		
+		System.out.println(list);
+	}
+
+}
+
+OUTPUT:
+[Appu, 10, 12.33]
+
 

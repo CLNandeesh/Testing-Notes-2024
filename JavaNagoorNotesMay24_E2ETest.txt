@@ -4738,4 +4738,392 @@ Name is: appu
 password is: appu123
 BANKING ACTIVITY ENDED
 
+Waiting for one thread to be completed before other thread complete its execution
+---------------------------------------------------------------------------------
+refVar.isAlive() //check is thread started and running
+Ex:System.out.println(b.isAlive());
+
+refVar.join()//make wait for this thread to complete
+Ex:b.join();
+
+
+Ex:Check thread b,g and l is alive or not and Main thread wait for b,g and l thread to finish exe before it terminates
+
+class Banking2 extends Thread {
+
+	@Override
+	public void run() {
+
+		System.out.println("BANKING ACTIVITY STARTED");
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter name");
+		String name = sc.next();
+		System.out.println("Enter password");
+		String password = sc.next();
+
+		System.out.println("Name is: " + name);
+		System.out.println("password is: " + password);
+		System.out.println("BANKING ACTIVITY ENDED");
+
+	}
+
+}
+
+class Gaming2 extends Thread {
+
+	@Override
+	public void run() {
+
+		System.out.println("GAMING ACTIVITY STARTED");
+		System.out.println("Need for speed game");
+		for (int i = 0; i < 10; i++) {
+			System.out.println("Car driving in speed " + i + " KM");
+		}
+		System.out.println("GAMING ACTIVITY ENDED");
+
+	}
+}
+
+class Loop2 extends Thread {
+
+	@Override
+	public void run() {
+		System.out.println("LOOP ACTIVITY STARTED");
+		for (int i = 0; i < 5; i++) {
+			System.out.println("APPU is BOSS");
+		}
+		System.out.println("LOOP ACTIVITY ENDED");
+
+	}
+
+}
+
+public class MakingMainThreadToWaitForOtherThread {
+
+	public static void main(String[] args) throws InterruptedException {
+
+		System.out.println("Main Thread Started");
+		System.out.println("Resource Opened");
+
+		Banking2 b = new Banking2();
+		Gaming2 g = new Gaming2();
+		Loop2 l = new Loop2();
+
+		// To Check b,g,l thread is alive or not
+		System.out.println(b.isAlive());
+		System.out.println(g.isAlive());
+		System.out.println(l.isAlive());
+
+		b.start();
+		g.start();
+		l.start();
+
+		// To Check b,g,l thread is alive or not
+		System.out.println(b.isAlive());
+		System.out.println(g.isAlive());
+		System.out.println(l.isAlive());
+
+		// Main thread wait for b,g and l thread
+		b.join();
+		g.join();
+		l.join();
+
+		System.out.println("Resource Closed");
+		System.out.println("Main Thread Ended");
+
+	}
+
+}
+
+OUTPUT:
+Main Thread Started
+Resource Opened
+false
+false
+false
+true
+true
+true
+GAMING ACTIVITY STARTED
+Need for speed game
+BANKING ACTIVITY STARTED
+LOOP ACTIVITY STARTED
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+LOOP ACTIVITY ENDED
+Car driving in speed 0 KM
+Car driving in speed 1 KM
+Car driving in speed 2 KM
+Car driving in speed 3 KM
+Car driving in speed 4 KM
+Car driving in speed 5 KM
+Car driving in speed 6 KM
+Car driving in speed 7 KM
+Car driving in speed 8 KM
+Car driving in speed 9 KM
+GAMING ACTIVITY ENDED
+Enter name
+appu
+Enter password
+appu123
+Name is: appu
+password is: appu123
+BANKING ACTIVITY ENDED
+Resource Closed
+Main Thread Ended
+
+Within one run(), seperate thread execute seperate methods
+----------------------------------------------------------
+Ex:Seperate Thread Executes Seperate Methods Within One RunMethod
+
+class MultiTasking implements Runnable {
+
+	@Override
+	public void run() {
+		String threadname = Thread.currentThread().getName();
+		if (threadname.equals("BANK")) {
+			banking();
+		} else if (threadname.equals("GAME")) {
+			carGaming();
+		} else {
+			looping();
+		}
+
+	}
+
+	public void banking() {
+		System.out.println("BANKING ACTIVITY STARTED");
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter name");
+		String name = sc.next();
+		System.out.println("Enter password");
+		String password = sc.next();
+
+		System.out.println("Name is: " + name);
+		System.out.println("password is: " + password);
+		System.out.println("BANKING ACTIVITY ENDED");
+	}
+
+	public void carGaming() {
+		System.out.println("GAMING ACTIVITY STARTED");
+		System.out.println("Need for speed game");
+		for (int i = 0; i < 10; i++) {
+			System.out.println("Car driving in speed " + i + " KM");
+		}
+		System.out.println("GAMING ACTIVITY ENDED");
+	}
+
+	public void looping() {
+		System.out.println("LOOP ACTIVITY STARTED");
+		for (int i = 0; i < 5; i++) {
+			System.out.println("APPU is BOSS");
+		}
+		System.out.println("LOOP ACTIVITY ENDED");
+	}
+
+}
+
+public class SeperateThreadExecutesSeperateMethodsWithinOneRunMethod {
+
+	public static void main(String[] args) throws InterruptedException {
+
+		System.out.println("Main STARTED");
+		MultiTasking m = new MultiTasking();
+		Thread t1 = new Thread(m);
+		Thread t2 = new Thread(m);
+		Thread t3 = new Thread(m);
+
+		t1.setName("BANK");
+		t2.setName("GAME");
+		t3.setName("LOOP");
+
+		t1.start();
+		t2.start();
+		t3.start();
+
+		t1.join();
+		t2.join();
+		t3.join();
+
+		System.out.println("Main ENDED");
+	}
+
+}
+
+OUTPUT:
+Main STARTED
+BANKING ACTIVITY STARTED
+LOOP ACTIVITY STARTED
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+APPU is BOSS
+LOOP ACTIVITY ENDED
+GAMING ACTIVITY STARTED
+Need for speed game
+Car driving in speed 0 KM
+Car driving in speed 1 KM
+Car driving in speed 2 KM
+Car driving in speed 3 KM
+Car driving in speed 4 KM
+Car driving in speed 5 KM
+Car driving in speed 6 KM
+Car driving in speed 7 KM
+Car driving in speed 8 KM
+Car driving in speed 9 KM
+GAMING ACTIVITY ENDED
+Enter name
+appu
+Enter password
+appu123
+Name is: appu
+password is: appu123
+BANKING ACTIVITY ENDED
+Main ENDED
+
+Making one thread to exe and complete the run() -synchronized()
+---------------------------------------------------------------
+
+->If we make method as synchronized then that method can be used by one thread at a time, until that thread finish executing themethod other thread will be in waiting state
+->If any method is synchronized, then once any thread start executing run() then all other thread should wait untill it finish the execution.
+->Can be applied to method and block
+
+
+Ex:Boy star using bathroom, all other thread girl and others should wait untill he finish
+
+class BathRoom implements Runnable {
+
+	@Override
+	synchronized public void run() {
+
+		System.out.println(Thread.currentThread().getName() + " entered");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(Thread.currentThread().getName() + " using");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(Thread.currentThread().getName() + " finished");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+}
+
+public class SynchronizedmethodDemo {
+
+	public static void main(String[] args) {
+
+		BathRoom b = new BathRoom();
+		Thread t1 = new Thread(b);
+		Thread t2 = new Thread(b);
+		Thread t3 = new Thread(b);
+
+		t1.setName("BOY");
+		t2.setName("GIRL");
+		t3.setName("OTHERS");
+
+		t1.start();
+		t2.start();
+		t3.start();
+
+	}
+
+}
+
+OUTPUT:
+BOY entered
+BOY using
+BOY finished
+OTHERS entered
+OTHERS using
+OTHERS finished
+GIRL entered
+GIRL using
+GIRL finished
+
+->If we want to apply synchornization to spefic int then use sync block instead of applying sync to entire method
+
+Ex:All 3 childs can exe at same time for entering parking lot, but one can use parking lot at a time
+
+class SynchronizedBlock implements Runnable {
+
+	@Override
+	public void run() {
+
+		System.out.println(Thread.currentThread().getName() + " entered parking lot");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+
+		}
+
+		synchronized (this) {
+			System.out.println(Thread.currentThread().getName() + " parking the car");
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+
+			}
+
+			System.out.println(Thread.currentThread().getName() + " came out of the car");
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+
+			}
+		}
+
+	}
+
+}
+
+public class SynchronizedBlockDemo {
+
+	public static void main(String[] args) {
+
+		SynchronizedBlock sb = new SynchronizedBlock();
+		Thread t1 = new Thread(sb); // Creating thread for executing logic of run method inside SynchronizedBlock
+									// class
+		Thread t2 = new Thread(sb);
+		Thread t3 = new Thread(sb);
+
+		t1.setName("Child 1");
+		t2.setName("Child 2");
+		t3.setName("Child 3");
+
+		t1.start();
+		t2.start();
+		t3.start();
+
+	}
+
+}
+
+OUTPUT:
+Child 2 entered parking lot
+Child 3 entered parking lot
+Child 1 entered parking lot
+Child 1 parking the car
+Child 1 came out of the car
+Child 2 parking the car
+Child 2 came out of the car
+Child 3 parking the car
+Child 3 came out of the car
 

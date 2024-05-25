@@ -5141,11 +5141,24 @@ PACKAGES
 ************************************************************************************************************************************************************
 COLLECTIONS
 ===========
+
+Hierarchy
+---------
+Iterable->Collection->List/Queue/Set
+
+List->Array List/LinkedList
+
+Queue->DQueue[ArrayDQueue]/PriorityQueue
+
+Set->SortedSet[TreeSet]/HashSet[LinkedHashSet]
+
+
 ArrayList
 ---------
-->Follow dynamic array ds
-->Index based
-->Takes more time for insertion and deletion sinch shifting happens, solution is go wit linked list
+->Follow dynamic array ds/Implements list interface/Index based/Order of Insertion preserved/Allow duplicates/Any number of null can be added
+->Takes more time for insertion and deletion since shifting happens when try to insert elem at specific index, solution is go wit linked list
+->Add elem at rear end
+
 Ex:
 public class Collection1 {
 
@@ -5155,13 +5168,90 @@ public class Collection1 {
 		list.add("Appu");
 		list.add(10);
 		list.add(12.33f);
-		
+		list.add(null);
+		list.add(null);
+		list.add("Appu");
+
 		System.out.println(list);
 	}
 
 }
 
+
 OUTPUT:
-[Appu, 10, 12.33]
+[Appu, 10, 12.33, null, null, Appu]
+
+Linked List
+-----------
+->Can be added elem at first,last,any specific index
+->Follow doubly linked list DS
+->Good for insertion and deletion
+->Implements list and DQuue interface/Index based/Order of Insertion preserved/Allow duplicates/Any number of null can be added
+
+Ex:
+
+public class Collection1 {
+
+	public static void main(String[] args) {
+
+		LinkedList list = new LinkedList();
+		list.add("Appu");
+		list.add(10);
+		list.add(12.33f);
+		list.add(null);
+		list.add(null);
+		list.add("Appu");
+		list.addFirst("Rajkumar");
+		list.addLast("Appu kumar");
+		System.out.println(list.peekFirst());
+		System.out.println(list);
+	}
+
+}
+
+
+OUTPUT:
+Rajkumar
+[Rajkumar, Appu, 10, 12.33, null, null, Appu, Appu kumar]
+
+peekFirst():return first elem
+pollFirst():return frst elem and also rmeove from list
+
+ArrayDQueue
+-----------
+->Double ended Q/Not index based/Allow duplicates/Not allow null elements/Insetion order preserved
+->Perform operation on rear and front end
+
+Ex:
+
+		ArrayDeque a = new ArrayDeque();
+		a.add("Appu");
+		a.add("Appu");
+		a.add(100);
+		//a.add(null);// java.lang.NullPointerException
+		///a.add(null);// java.lang.NullPointerException
+		System.out.println(a);
+
+OUTPUT:
+[Appu, Appu, 100]
+
+PriorityQueue
+--------------
+->Not index based/allow duplicates/not follow insertion order[priority order]/not allow null
+->Follow minumum heap DS
+->Can store same form of elements, only int or only string,....else class cast exception
+
+Ex:
+		PriorityQueue p=new PriorityQueue();
+		p.add(100);
+		p.add(101);
+		p.add(100);
+                p.add("Appu"); //classcastexception
+		//p.add(null);
+		System.out.println(p);
+
+OUTPUT:
+[100, 101, 100]
+
 
 

@@ -5158,6 +5158,7 @@ ArrayList
 ->Follow dynamic array ds/Implements list interface/Index based/Order of Insertion preserved/Allow duplicates/Any number of null can be added
 ->Takes more time for insertion and deletion since shifting happens when try to insert elem at specific index, solution is go wit linked list
 ->Add elem at rear end
+->Take more time for search
 
 Ex:
 public class Collection1 {
@@ -5237,9 +5238,8 @@ OUTPUT:
 
 PriorityQueue
 --------------
-->Not index based/allow duplicates/not follow insertion order[priority order]/not allow null
+->Not index based/allow duplicates/not follow insertion order[priority order]/not allow null/Homegeneous data[same type only] else class cast exception
 ->Follow minumum heap DS
-->Can store same form of elements, only int or only string,....else class cast exception
 
 Ex:
 		PriorityQueue p=new PriorityQueue();
@@ -5253,5 +5253,170 @@ Ex:
 OUTPUT:
 [100, 101, 100]
 
+->Time complexity for search operation is more in Array list,linked list,dqueue,priority dqueue O(n)
 
+Tree Set
+--------
+->Implements Sorted set interface
+->Not index/No ins order/Follow sorted order/Homegeneous data[same type only] else class cast exception/No null values/No duplicates
+->Follow Binary search tree DS
+->If tree is balanced search tree then its efficient search else not efficient
 
+Ex:
+		TreeSet ts = new TreeSet();
+		ts.add(20);
+		ts.add(10);
+		//ts.add("Appu"); //java.lang.ClassCastException
+		ts.add(100);
+		ts.add(1);
+		//ts.add(null); null pointer exception
+		ts.add(10);
+
+OUTPUT:
+[1, 10, 20, 100]
+
+HashSet
+-------
+->Follows hashing algorithm
+->Not index based/No sorting or insertion order/Follow hashing order/allow null/homogeneous and hetergeneous/No duplicates
+->Efficient search operation
+
+Ex:
+		HashSet h = new HashSet();
+
+		h.add(100);
+		h.add(10);
+		h.add(100);
+		h.add(200);
+		h.add("Appu");
+		h.add(null);
+
+		System.out.println(h);
+
+OUTPUT:
+[null, 100, 200, 10, Appu]
+
+Linked HashSet
+--------------
+->Same as Hashset but it follows insertion order
+Ex:
+		LinkedHashSet h = new LinkedHashSet();
+
+		h.add(100);
+		h.add(10);
+		h.add(100);
+		h.add(200);
+		h.add("Appu");
+		h.add(null);
+
+		System.out.println(h);
+
+OUTPUT:
+[100, 10, 200, Appu, null]
+
+Retrieving data from collection
+-------------------------------
+Ex:
+public class Collection1 {
+
+	public static void main(String[] args) {
+
+		List list = new ArrayList();
+		list.add(100);
+		list.add(200);
+		list.add(300);
+		list.add(400);
+
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+
+		System.out.println("**********************");
+
+		for (Object i : list) {
+			System.out.println(i);
+		}
+
+		System.out.println("**********************");
+
+		Iterator it = list.iterator();
+		while (it.hasNext()) {
+			System.out.println(it.next());
+		}
+
+		System.out.println("**********************");
+
+		ListIterator li = list.listIterator();
+
+		while (li.hasNext()) {
+			System.out.println(li.next());
+		}
+
+		System.out.println("**********************");
+
+		ListIterator li2 = list.listIterator(list.size());
+
+		while (li2.hasPrevious()) {
+			System.out.println(li2.previous());
+		}
+
+	}
+
+}
+
+OUTPUT:
+100
+200
+300
+400
+**********************
+100
+200
+300
+400
+**********************
+100
+200
+300
+400
+**********************
+100
+200
+300
+400
+**********************
+400
+300
+200
+100
+
+CopyOnWriteArrayList
+---------------------
+->List which not allow concurrent modification 
+
+Collections
+-----------
+->Class whch has static methods
+
+Ex:
+public class CopyOnWriteArrayListDemo {
+
+	public static void main(String[] args) {
+
+		List l = new ArrayList();
+		l.add(22);
+		l.add(12);
+		l.add(2);
+		l.add(212);
+		l.add(0);
+
+		System.out.println(l);
+		Collections.sort(l);
+		System.out.println(l);
+
+	}
+
+}
+OUTPUT:
+[22, 12, 2, 212, 0]
+[0, 2, 12, 22, 212]

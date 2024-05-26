@@ -5420,3 +5420,38 @@ public class CopyOnWriteArrayListDemo {
 OUTPUT:
 [22, 12, 2, 212, 0]
 [0, 2, 12, 22, 212]
+************************************************************************************************************************************************************
+JDBC:JAVA DATABASE CONNECTIVITY
+===============================
+->API givin by java to work with Database
+->rt.jar file-:Contains all archive files of jdbc implementation classes[On installing jdk this will also be installed]
+->java.sql.*:contains all classes and interfaces to work on jdbc
+->To get implementation for interfaces abstract methods, need help from DB Vendors, they give us in form of java archive files[jar]
+
+MVC:Model View COntroller Design Pattern
+
+MySQL DB:
+
+Steps to follow to perform JDBC operation
+-----------------------------------------
+->Import packages and add required jsr files from db vendor [mysql connectors for jdbc]
+->Load and register driver to project
+->Estlablish connection
+->Prepare sql statements
+->Execute query
+->Process the result
+->Handle all exception if any
+->Close the resources
+
+To execute select query
+ public ResultSet executeQuery(String query) throws SQLException
+
+Other query
+ public int executeUpdate(String query) throws SQLException
+
+ 
+
+
+
+
+

@@ -5431,6 +5431,8 @@ JDBC:JAVA DATABASE CONNECTIVITY
 MVC:Model View COntroller Design Pattern
 
 MySQL DB:
+port 3306
+
 
 Steps to follow to perform JDBC operation
 -----------------------------------------
@@ -5449,8 +5451,336 @@ To execute select query
 Other query
  public int executeUpdate(String query) throws SQLException
 
- 
+ Ex:
+public class FirstJavaProgram {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
+		try {
+
+			// Load and register driver to project
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("Driver Loaded");
+
+			// Estlablish connection
+			String url = "jdbc:mysql://localhost:3306/student";
+			String password = "root";
+			String username = "admin";
+			Connection connection = DriverManager.getConnection(url, username, password);
+			System.out.println("Connection estlablished");
+
+			// Prepare sql statements
+			Statement statement = connection.createStatement();
+			System.out.println("SQL Statement prepared");
+
+			// Prepare Query
+			String query = "SELECT * FROM studetdetails";
+			System.out.println("Query created");
+
+			// Execute query
+			ResultSet resultSet = statement.executeQuery(query);
+			System.out.println("Query executed");
+
+			// Process Query result
+			System.out.println("ID" + " " + "NAME" + " " + "AGE" + " " + "ADDRESS");
+			while (resultSet.next()) {
+				System.out.print(resultSet.getInt("id") + " ");
+				System.out.print(resultSet.getString("name") + " ");
+				System.out.print(resultSet.getInt(3) + " ");
+				System.out.print(resultSet.getString(4));
+
+			}
+			System.out.println("Query result Processed");
+
+			resultSet.close();
+			statement.close();
+			connection.close();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+}
+
+OUTPUT:
+Driver Loaded
+Connection estlablished
+SQL Statement prepared
+Query created
+Query executed
+ID	NAME	AGE	ADDRESS
+10	Appu	23	Mysore
+11	Raghu	33	Mysore
+12	Darshan	35	Bangalore
+13	Sudeep	45	Mandya
+14	Ganesh	26	Udupi
+Query result Processed
+Allo Connection Closed
+
+
+Ex:
+JDBCProgramToInserttDataIntoMysqlDB 
+
+public class JDBCProgramToInserttDataIntoMysqlDB {
+
+	public static final String url = "jdbc:mysql://localhost:3306/student";
+	public static final String username = "root";
+	public static final String password = "admin";
+	public static Connection connection = null;
+	public static Statement statement = null;
+	public static String query = null;
+	public static int resultSet = 0;
+
+	public static void main(String[] args) throws SQLException {
+		try {
+
+			// Load and register driver to project
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("Driver Loaded");
+
+			// Estlablish connection
+			connection = DriverManager.getConnection(url, username, password);
+			System.out.println("Connection estlablished");
+
+			// Prepare sql statements
+			statement = connection.createStatement();
+			System.out.println("SQL Statement prepared");
+
+			// Prepare Query
+			query = "insert into studetdetails value(14,'Ganesh',26,'Udupi')";
+			System.out.println("Query created");
+
+			// Execute query
+			resultSet = statement.executeUpdate(query);
+			System.out.println("Query executed");
+
+			// Process Query result
+			if (resultSet == 1) {
+				System.out.println("Query result Processed");
+			} else {
+				System.out.println("Something went wrong while inserting data");
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {
+			statement.close();
+			connection.close();
+			System.out.println("Allo Connection Closed");
+		}
+	}
+
+
+OUTPUT:
+Driver Loaded
+Connection estlablished
+SQL Statement prepared
+Query created
+Query executed
+Query result Processed
+Allo Connection Closed
+
+
+Ex:Delete Query
+
+public class DeleteRows {
+
+	public static final String url = "jdbc:mysql://localhost:3306/student";
+	public static final String username = "root";
+	public static final String password = "admin";
+	public static Connection connection = null;
+	public static Statement statement = null;
+	public static String query = null;
+	public static int resultSet = 0;
+
+	public static void main(String[] args) throws SQLException {
+		try {
+
+			// Load and register driver to project
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("Driver Loaded");
+
+			// Estlablish connection
+			connection = DriverManager.getConnection(url, username, password);
+			System.out.println("Connection estlablished");
+
+			// Prepare sql statements
+			statement = connection.createStatement();
+			System.out.println("SQL Statement prepared");
+
+			// Prepare Query
+			query = "delete from studetdetails where name ='Ganesh'";
+			System.out.println("Query created");
+
+			// Execute query
+			resultSet = statement.executeUpdate(query);
+			System.out.println("Query executed");
+
+			// Process Query result
+			if (resultSet >=1) {
+				System.out.println("Query result Processed");
+			} else {
+				System.out.println("Something went wrong while Deleting data");
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {
+			statement.close();
+			connection.close();
+			System.out.println("Allo Connection Closed");
+		}
+	}
+
+
+}
+
+OUTPUT:
+Driver Loaded
+Connection estlablished
+SQL Statement prepared
+Query created
+Query executed
+Something went wrong while Deleting data
+Allo Connection Closed
+
+Ex:Prepare staement
+
+
+public class PrepareStatementJDBC {
+
+	public static Connection connect = null;
+	public static PreparedStatement pstmt = null;
+	public static ResultSet result = null;
+	public static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) throws SQLException {
+
+		try {
+
+			connect = DatabaseConnection.getInstance().getConnection();
+			System.out.println("Connection Estlablished");
+
+			String query = null;
+			if (connect != null) {
+				query = "insert into studetdetails(id,name,age,address)values(?,?,?,?)";
+				pstmt = connect.prepareStatement(query);
+			}
+
+			if (pstmt != null) {
+				System.out.println("Enter details to be stored");
+
+				System.out.println("Enter ID");
+				Integer id = sc.nextInt();
+
+				System.out.println("Enter Name");
+				String name = sc.next();
+
+				System.out.println("Enter Age");
+				Integer age = sc.nextInt();
+
+				System.out.println("Enter Address");
+				String address = sc.next();
+
+				pstmt.setInt(1, id);
+				pstmt.setString(2, name);
+				pstmt.setInt(3, age);
+				pstmt.setString(4, address);
+
+				int rowsAffected = pstmt.executeUpdate();
+
+				if (rowsAffected >= 1) {
+					System.out.println("Data inserted");
+				} else {
+					System.out.println("Something went wrong while inserting");
+				}
+			}
+		} catch (Exception e) {
+
+		} finally {
+			DatabaseConnection.closeConnection(connect, result, pstmt);
+			sc.close();
+		}
+
+	}
+
+}
+
+
+OUTPUT:
+Connection Estlablished
+Enter details to be stored
+Enter ID
+101
+Enter Name
+gani
+Enter Age
+33
+Enter Address
+mandya
+Data inserted
+
+Ex6:Executing multiple query at once
+
+public class BatchJobUsingPrepareStatement {
+
+	public static Connection connect = null;
+	public static PreparedStatement pstmt = null;
+	public static ResultSet result = null;
+	public static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) throws SQLException {
+		try {
+
+			connect = DatabaseConnection.getInstance().getConnection();
+			System.out.println("Connection Estlablished");
+
+			String query = null;
+			if (connect != null) {
+				query = "update studetdetails set name=? where id=?";
+				pstmt = connect.prepareStatement(query);
+			}
+
+			if (pstmt != null) {
+				pstmt.setString(1, "Nandu");
+				pstmt.setInt(2, 10);
+				pstmt.addBatch();
+
+				pstmt.setString(1, "Jaysimha");
+				pstmt.setInt(2, 11);
+				pstmt.addBatch();
+
+				pstmt.executeBatch();
+
+				System.out.println("Data Updated");
+
+			}
+		} catch (Exception e) {
+
+		} finally {
+			DatabaseConnection.closeConnection(connect, result, pstmt);
+			sc.close();
+		}
+
+	}
+
+}
 
 
 

@@ -40,7 +40,9 @@ Class/Abstract Class/Interface
 37.STRINGS
 38.LABMDA EXPRESSION
 39.EXCEPTION HANDLING
-40.COLLECTIONS
+40.COLLECTIONS and MAP
+41.JDBC
+42.SERVLET
 
 ************************************************************************************************************************************************************
 Day 1,2,3
@@ -5420,6 +5422,11 @@ public class CopyOnWriteArrayListDemo {
 OUTPUT:
 [22, 12, 2, 212, 0]
 [0, 2, 12, 22, 212]
+
+MAP
+===
+->HashMap and HashTable
+
 ************************************************************************************************************************************************************
 JDBC:JAVA DATABASE CONNECTIVITY
 ===============================
@@ -5781,6 +5788,21 @@ public class BatchJobUsingPrepareStatement {
 	}
 
 }
+
+************************************************************************************************************************************************************
+SERVLETS
+========
+Steps:
+->Browser sends request to Server
+->If its for static response, then Server will responds to it by itself
+->If its dynamic then Server will identify which java code[Servlet code] to be executed to serve that request based on annotation or web.xml
+->Once it identified, Server handover control to respective Servlet[Container]
+Servlet code will be executed and Response send bck to client from Server.
+
+
+
+
+
 
 
 

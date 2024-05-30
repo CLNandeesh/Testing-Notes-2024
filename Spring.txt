@@ -1,0 +1,32 @@
+**********************************************SPRING FRAMEWORK************************************************************
+Spring:Application development framework to do develop end to end application
+
+UI       			Controller     Service 	                DAO
+ Html/CSS                        Spring MVC     Spring security          Spring JDBC
+ JSP 						Spring Mail              Spring ORM
+ Spring Libraries    				Spring transaction       Spring data JPA
+						Spring AOP 
+                             
+ 
+                            ---------Spring BOOT---------------------------------------
+
+Spring Framework
+----------------
+->How to use Spring framework
+    XML driver configuration/Annotation driven configuration/Pure Java configuration/Auto driven configuration[Rapid App Development][Spring BOOT]
+
+Simplified version of Spring core to develop end to end application
+Non Invasive:no need to extends any other class or interface
+Versatile:Can be integrated with struts,servlets,hibernate,...
+
+Sping Core
+----------
+XML or Annotation Approach
+IOC:Inversion of Control
+Dependency injection
+Spring Container
+
+->Develop loosely coupled applications[De couple dependecy between classes]
+->Object created by Spring is Bean
+->Object created by us in method with annotation @bean is also a Bean
+

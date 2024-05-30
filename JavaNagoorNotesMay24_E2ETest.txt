@@ -5425,8 +5425,68 @@ OUTPUT:
 
 MAP
 ===
-->HashMap and HashTable
+->HashMap
+  Key should be uniquie and can be null
+  Not maintain orde of insertion
 
+->HashTable
+  Key should be uniquie and can not be null
+  Not maintain orde of insertion
+
+->Linked HashMap
+ Maintain order of insertion
+
+->TreeMap
+ Maintain sorted order
+
+Ex:
+
+public class MapDemo {
+
+	public static void main(String[] args) {
+
+		Map map = new HashMap();
+		map.put(1,"Appu");
+		map.put(2,"Shivu");
+		map.put(3,"Raghu");
+		System.out.println(map);
+		
+		System.out.println("Values");
+		Collection list=map.values();
+		Iterator it=list.iterator();
+		while(it.hasNext())
+		{
+			System.out.println("Value is:"+it.next());
+		}
+		
+		System.out.println("Keys");
+		Set set=map.keySet();
+		Iterator it1=set.iterator();
+		while(it1.hasNext())
+		{
+			System.out.println("Key is:"+it1.next());
+		}
+		
+		Set set1=map.entrySet();
+		System.out.println(set1);
+		
+		
+
+	}
+
+}
+
+OUTPUT:
+{1=Appu, 2=Shivu, 3=Raghu}
+Values
+Value is:Appu
+Value is:Shivu
+Value is:Raghu
+Keys
+Key is:1
+Key is:2
+Key is:3
+[1=Appu, 2=Shivu, 3=Raghu]
 ************************************************************************************************************************************************************
 JDBC:JAVA DATABASE CONNECTIVITY
 ===============================

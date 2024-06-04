@@ -22,7 +22,7 @@ Versatile:Can be integrated with struts,servlets,hibernate,...
 Sping Core
 ----------
 XML or Annotation Approach
-IOC:Inversion of Control
+IOC:Inversion of Control[Creating obj ]
 Dependency injection
 Spring Container
 
@@ -30,3 +30,6 @@ Spring Container
 ->Object created by Spring is Bean
 ->Object created by us in method with annotation @bean is also a Bean
 
+*********************************SPRING BOOT****************************************************************************************
+
+mainApp->Controller->Service->DAO

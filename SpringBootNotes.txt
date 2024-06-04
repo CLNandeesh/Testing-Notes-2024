@@ -1,0 +1,137 @@
+*********************************************Spring Introduction*******************************************************************************************
+Major components of Spring
+--------------------------
+IOC:Giving control of creating an object for required classes to Spring framework for maintaining loosed coupling.[Remove dependency between classes]
+Dependency Injection:Design pattern for creating this object
+IOC Container:One who creates Object, maintains Bean life cycle.[Bean factory/Application context]
+Bean:Any POJO java class controlled by Spring[Spring IOC] for creating Object based on XML or Annotations.Spring IOC manages these beans.
+Context:Memory location where we add all objects created by Spring IOC.[Beans info will be stored]
+Spell:Provides expression lang for quering and manipulating object at rutime like setting value, getting value, method invocation, property assignment,...
+
+M:Data layer
+V:UI layer
+C:Controller layer
+Spring MVC
+
+F1:Client->Tomcat->Dispatcher Servlet
+F2:Dispatcher Servlet->Handler Mapping->Dispatcher Servlet
+F3:Dispatcher Servlet->Controller->Dispatcher Servlet
+F4:Dispatcher Servlet->View Resolver->Dispatcher Servlet
+F5:Dispatcher Servlet->Tomcat->Client
+
+F1:Client sends request for any specific resource through end pint to Server and it goes to Dispatcher Servlet
+F2:Dispatcher Servlet calls Handler Mapping, HM see the URL and tells which method in which controller should be invoked
+F3:Dispatcher Servlet invokes specific Controller told by HM, Controller process the request ad provide response[Static HTML View or Dynamic HTML View with dynamic content]
+F4:Dispatcher Servlet invokes View resolver to convert dynamic[put all dynamic content data to html page] content provide by COntroller into HTML View and give back to Dispatcher Servlet
+F5:Dispatcher Servlet give response to browser through Server
+
+                                  Handler Mapping                     
+
+Client <---> Tomcat Server <---> Dispatch Controller <---> Controller
+             
+                                   View Resolver
+
+                               
+                                 ****Spring MVC*****************
+
+*********************************************Spring Notes*********************************************************************************************
+->To Create Web Application
+https://start.spring.io/
+
+->By default internally Spring invokes DispatcherServlet dispatcherServlet() when Controller class method is invoked to serve the request.
+->Return type of any static html page is String
+
+
+
+
+
+*********************************************Spring Annotaions*********************************************************************************************
+@SpringBootApplication
+----------------------
+Used for Class, to indicate start of the Appliction
+Bootstrapping or Initialization of the web application will start
+
+Ex:
+@SpringBootApplication
+public class EazySchoolApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(EazySchoolApplication.class, args);
+		System.out.println("Application is UP and RUNNING");
+	}
+
+}
+
+@Controller
+-----------
+Used for Class
+Used to indicate the class is controller class.
+
+Ex:
+@Controller
+public class HomeController {
+	
+	@RequestMapping("/home")
+	public String displayHomePage()
+	{
+		return "home.html";
+	}
+
+}
+
+@RequestMapping("/home")
+------------------------
+Used inside Controller class
+Used for Methods
+To specify which method has to be invoked, when the speicifc endpoint is called
+When /home is invoked, displayHomePage() of controller class should be invoked.
+Return type of any static html page is String
+
+Ex:
+@Controller
+public class HomeController {
+	
+	@RequestMapping("/home")
+	public String displayHomePage()
+	{
+		return "home.html";
+	}
+
+}
+
+src/main/resource
+-----------------
+It has two folders
+templates
+  where we keep all html files
+static/assets/css AND static/assets/images AND static/assets/jss AND static/assets/webfonts
+  where we keep all supporting files
+
+application.properties file
+---------------------------
+Properties file which contains all configuration informations
+
+Ex:
+spring.application.name=EazySchoolApplication
+server.port=9096 //To change default server port
+server.servlet.context-path=/eazyschool //To change default context path[root path]
+server.port=0 //Random port number will be used
+
+Autoconfigurationreport
+------------------------
+To see all the default configuration details.
+
+Steps:
+  Add debug=true in application.properties file
+  Run application in Debug mode
+
+Adding Multiple Path for the request method
+-------------------------------------------
+Ex:
+public static void main(String[] args) {
+	SpringApplication.run(EazySchoolApplication.class, args);
+	System.out.println("Application is UP and RUNNING");
+}
+
+
+*********************************************ThymeLeaf*********************************************************************************************
